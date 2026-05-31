@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.instagram.designsystem.core.designsystem.components.button.textbutton.base.ButtonCatalogScreen
+import com.instagram.designsystem.core.designsystem.components.button.ButtonCatalogScreen
 import com.instagram.designsystem.feature.presentation.screen.CatalogHomeScreen
 
 @Composable
