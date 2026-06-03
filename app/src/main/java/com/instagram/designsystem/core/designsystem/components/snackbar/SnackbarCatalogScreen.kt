@@ -1,0 +1,138 @@
+package com.instagram.designsystem.core.designsystem.components.snackbar
+
+import androidx.compose.animation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
+
+@Composable
+fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
+    val snackbarQueue = remember { mutableStateListOf<SnackbarData>() }
+    var currentSnackbar by remember { mutableStateOf<SnackbarData?>(null) }
+    var nextId by remember { mutableLongStateOf(0L) }
+
+    // Logic to show snackbars one by one
+    LaunchedEffect(currentSnackbar) {
+        if (currentSnackbar == null) {
+            if (snackbarQueue.isNotEmpty()) {
+                currentSnackbar = snackbarQueue.removeAt(0)
+            }
+        } else {
+            delay(currentSnackbar?.durationMillis ?: 4000L)
+            if (snackbarQueue.isNotEmpty()) {
+                currentSnackbar = snackbarQueue.removeAt(0)
+            } else {
+                currentSnackbar = null
+            }
+        }
+    }
+
+    // Trigger when items are added to an empty queue
+    LaunchedEffect(snackbarQueue.size) {
+        if (currentSnackbar == null && snackbarQueue.isNotEmpty()) {
+            currentSnackbar = snackbarQueue.removeAt(0)
+        }
+    }
+
+    Box(modifier = modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // ... buttons ...
+            Button(onClick = {
+                snackbarQueue.add(
+                    SnackbarData(
+                        id = nextId++,
+                        variation = SnackbarVariation.Basic("Middle Blue Text")
+                    )
+                )
+            }) {
+                Text("Basic Snackbar")
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(onClick = {
+                snackbarQueue.add(
+                    SnackbarData(
+                        id = nextId++,
+                        variation = SnackbarVariation.WithIcon("Text and Icon", Icons.Default.Notifications)
+                    )
+                )
+            }) {
+                Text("Icon to Right Snackbar")
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(onClick = {
+                snackbarQueue.add(
+                    SnackbarData(
+                        id = nextId++,
+                        variation = SnackbarVariation.Complex(
+                            icon = Icons.Default.Star,
+                            text = "Complex Layout",
+                            topActionText = "Option 1",
+                            bottomActionText = "Option 2",
+                            onTopActionClick = { println("Top Clicked") },
+                            onBottomActionClick = { println("Bottom Clicked") }
+                        )
+                    )
+                )
+            }) {
+                Text("Complex Snackbar")
+            }
+        }
+
+        // Display current snackbar at the bottom with slide-in from right
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 16.dp),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            AnimatedContent(
+                targetState = currentSnackbar,
+                modifier = Modifier.fillMaxWidth(),
+                transitionSpec = {
+                    if (targetState != null) {
+                        // New snackbar entering: Slide in from right
+                        (slideInHorizontally { width -> width } + fadeIn()) togetherWith
+                                (slideOutHorizontally { width -> width } + fadeOut())
+                    } else {
+                        // Snackbar being removed (timer or swipe): 
+                        // If it was a swipe, DSSnackbar already moved it. 
+                        // Fade out looks good for both cases.
+                        (slideInHorizontally { width -> width } + fadeIn()) togetherWith
+                                fadeOut()
+                    }
+                },
+                label = "snackbarAnimation"
+            ) { snackbarData ->
+                if (snackbarData != null) {
+                    DSSnackbar(
+                        data = snackbarData,
+                        onDismiss = {
+                            if (currentSnackbar?.id == snackbarData.id) {
+                                currentSnackbar = null
+                            }
+                        }
+                    )
+                } else {
+                    // Placeholder to keep the width stable during transitions
+                    Spacer(modifier = Modifier.fillMaxWidth())
+                }
+            }
+        }
+    }
+}

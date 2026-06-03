@@ -23,5 +23,9 @@ val categories = listOf(
     ComponentCategory(
         title = "Bottom Sheets",
         route = CatalogRoute.BottomSheets.route
+    ),
+    ComponentCategory(
+        title = "Snackbars",
+        route = CatalogRoute.Snackbars.route
     )
 )

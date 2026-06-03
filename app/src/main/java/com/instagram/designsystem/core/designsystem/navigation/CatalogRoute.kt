@@ -6,4 +6,5 @@ sealed class CatalogRoute(val route: String) {
     data object TopBars : CatalogRoute("topbars")
     data object ExpandableTopBar : CatalogRoute("expandable_topbar")
     data object BottomSheets : CatalogRoute("bottomsheets")
+    data object Snackbars : CatalogRoute("snackbars")
 }
