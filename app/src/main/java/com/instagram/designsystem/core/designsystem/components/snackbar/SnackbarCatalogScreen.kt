@@ -27,10 +27,10 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
             }
         } else {
             delay(currentSnackbar?.durationMillis ?: 4000L)
-            if (snackbarQueue.isNotEmpty()) {
-                currentSnackbar = snackbarQueue.removeAt(0)
+            currentSnackbar = if (snackbarQueue.isNotEmpty()) {
+                snackbarQueue.removeAt(0)
             } else {
-                currentSnackbar = null
+                null
             }
         }
     }
