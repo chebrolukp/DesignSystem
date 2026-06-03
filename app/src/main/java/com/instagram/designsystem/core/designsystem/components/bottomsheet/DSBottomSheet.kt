@@ -25,8 +25,8 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.instagram.designsystem.R
 
 enum class SheetSize {
@@ -61,7 +61,7 @@ fun AppBottomSheet(
         modifier = if (size == SheetSize.Big) {
             Modifier
                 .fillMaxHeight()
-                .padding(top = (depth * 7).dp)
+                .padding(top = dimensionResource(R.dimen.bottom_sheet_depth_big_offset) * depth)
         } else {
             Modifier
         }
@@ -73,9 +73,9 @@ fun AppBottomSheet(
                     if (size == SheetSize.Big) Modifier.fillMaxHeight() else Modifier
                 )
                 .then(
-                    if (size == SheetSize.Small) Modifier.height((400 - (depth * 7)).dp) else Modifier
+                    if (size == SheetSize.Small) Modifier.height(dimensionResource(R.dimen.bottom_sheet_small_height) - (dimensionResource(R.dimen.bottom_sheet_depth_small_offset) * depth)) else Modifier
                 )
-                .padding(16.dp)
+                .padding(dimensionResource(R.dimen.padding_medium))
                 .verticalScroll(rememberScrollState())
         ) {
             Row(
@@ -84,41 +84,48 @@ fun AppBottomSheet(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = if (size == SheetSize.Big) "Big Bottom Sheet (Depth: $depth)" else "Small Bottom Sheet (Depth: $depth)",
+                    text = if (size == SheetSize.Big) {
+                        stringResource(R.string.big_bottom_sheet_title, depth)
+                    } else {
+                        stringResource(R.string.small_bottom_sheet_title, depth)
+                    },
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.weight(1f)
                 )
                 IconButton(onClick = onDismiss) {
-                    Icon(Icons.Default.Close, contentDescription = "Close")
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = stringResource(R.string.close)
+                    )
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
             
             Text(
                 text = stringResource(R.string.bottom_sheet_text).repeat(50),
                 style = MaterialTheme.typography.bodyMedium
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_large)))
 
             Button(
                 onClick = { onLaunchNext(SheetSize.Big) },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Launch Big Sheet")
+                Text(stringResource(R.string.launch_big_sheet))
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
 
             Button(
                 onClick = { onLaunchNext(SheetSize.Small) },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Launch Small Sheet")
+                Text(stringResource(R.string.launch_small_sheet))
             }
             
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_extra_large)))
         }
     }
 }

@@ -1,4 +1,36 @@
 <resources>
     <string name="app_name">DesignSystem</string>
-    <string name="bottom_sheet_text">This is a scrollable content area</string>
+    <string name="bottom_sheet_text">This is a scrollable content area. </string>
+
+    <!-- Snackbar Strings -->
+    <string name="dismiss_snackbar">Dismiss snackbar</string>
+    <string name="basic_snackbar_text">Middle Blue Text</string>
+    <string name="icon_snackbar_text">Text and Icon</string>
+    <string name="complex_snackbar_text">Complex Layout</string>
+    <string name="option_1">Option 1</string>
+    <string name="option_2">Option 2</string>
+    <string name="launch_basic_snackbar">Basic Snackbar</string>
+    <string name="launch_icon_snackbar">Icon to Right Snackbar</string>
+    <string name="launch_complex_snackbar">Complex Snackbar</string>
+
+    <!-- Bottom Sheet Strings -->
+    <string name="big_bottom_sheet_title">Big Bottom Sheet (Depth: %1$d)</string>
+    <string name="small_bottom_sheet_title">Small Bottom Sheet (Depth: %1$d)</string>
+    <string name="launch_big_dialog">Launch Big Dialog</string>
+    <string name="launch_small_dialog">Launch Small Dialog</string>
+    <string name="launch_big_sheet">Launch Big Sheet</string>
+    <string name="launch_small_sheet">Launch Small Sheet</string>
+    <string name="close">Close</string>
+
+    <!-- Top Bar Strings -->
+    <string name="back">Back</string>
+    <string name="add">Add</string>
+    <string name="expandable_title">Expandable Title</string>
+
+    <!-- Categories -->
+    <string name="category_buttons">Buttons</string>
+    <string name="category_top_bars">Top Bars</string>
+    <string name="category_expandable_topbar">Expandable TopBar</string>
+    <string name="category_bottom_sheets">Bottom Sheets</string>
+    <string name="category_snackbars">Snackbars</string>
 </resources>

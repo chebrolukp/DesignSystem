@@ -1,31 +1,33 @@
 package com.instagram.designsystem.core.designsystem.components
 
+import androidx.annotation.StringRes
+import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.navigation.CatalogRoute
 
 data class ComponentCategory(
-    val title: String,
+    @StringRes val titleRes: Int,
     val route: String
 )
 
 val categories = listOf(
     ComponentCategory(
-        title = "Buttons",
+        titleRes = R.string.category_buttons,
         route = CatalogRoute.Buttons.route
     ),
     ComponentCategory(
-        title = "Top Bars",
+        titleRes = R.string.category_top_bars,
         route = CatalogRoute.TopBars.route
     ),
     ComponentCategory(
-        title = "Expandable TopBar",
+        titleRes = R.string.category_expandable_topbar,
         route = CatalogRoute.ExpandableTopBar.route
     ),
     ComponentCategory(
-        title = "Bottom Sheets",
+        titleRes = R.string.category_bottom_sheets,
         route = CatalogRoute.BottomSheets.route
     ),
     ComponentCategory(
-        title = "Snackbars",
+        titleRes = R.string.category_snackbars,
         route = CatalogRoute.Snackbars.route
     )
 )

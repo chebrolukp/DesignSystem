@@ -9,10 +9,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.preview.MultiPreview
-import com.instagram.designsystem.core.designsystem.theme.Black
-import com.instagram.designsystem.core.designsystem.theme.White
 
 @Composable
 fun AppButton(
@@ -49,7 +48,7 @@ fun AppButton(
         ) {
             Icon(
                 imageVector = style.imageVector,
-                tint = if(enabled) White else Black,
+                tint = if (enabled) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
                 contentDescription = text
             )
         }
@@ -59,7 +58,7 @@ fun AppButton(
 @MultiPreview
 @Composable
 fun AppButtonPreview() {
-    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))) {
         Text("Primary")
         AppButton("Primary Enabled")
         AppButton("Primary Disabled", enabled = false)

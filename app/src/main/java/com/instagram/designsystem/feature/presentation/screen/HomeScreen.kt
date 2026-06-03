@@ -6,6 +6,7 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import com.instagram.designsystem.core.designsystem.components.categories
 
 @Composable
@@ -18,7 +19,7 @@ fun CatalogHomeScreen(
             val item = categories[index]
             ListItem(
                 headlineContent = {
-                    Text(item.title)
+                    Text(stringResource(item.titleRes))
                 },
                 modifier = Modifier.clickable {
                     onItemClick(item.route)

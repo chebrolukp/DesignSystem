@@ -23,17 +23,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
+
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import com.instagram.designsystem.R
 
 @Composable
 fun ExpandableTopBarScreen(modifier: Modifier = Modifier) {
     val scrollState = rememberLazyListState()
 
     // Max and min heights
-    val maxHeight = 120.dp
-    val minHeight = 64.dp
+    val maxHeight = dimensionResource(R.dimen.topbar_max_height)
+    val minHeight = dimensionResource(R.dimen.topbar_min_height)
     val maxHeightPx = with(LocalDensity.current) { maxHeight.toPx() }
     val minHeightPx = with(LocalDensity.current) { minHeight.toPx() }
 
@@ -91,7 +94,7 @@ fun ExpandableTopBarScreen(modifier: Modifier = Modifier) {
                     text = "Item $index",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(dimensionResource(R.dimen.padding_medium)),
                     style = MaterialTheme.typography.bodyLarge
                 )
             }
@@ -103,11 +106,11 @@ fun ExpandableTopBarScreen(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .height(animatedHeight)
                 .background(animatedBackgroundColor)
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = dimensionResource(R.dimen.padding_medium)),
             contentAlignment = Alignment.CenterStart
         ) {
             Text(
-                text = "Expandable Title",
+                text = stringResource(R.string.expandable_title),
                 fontSize = animatedTextSizeValue.sp,
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onSurface

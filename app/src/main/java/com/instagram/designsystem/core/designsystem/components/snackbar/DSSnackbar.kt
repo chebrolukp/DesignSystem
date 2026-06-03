@@ -18,6 +18,11 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.semantics
+import com.instagram.designsystem.R
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -55,7 +60,15 @@ fun DSSnackbar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(dimensionResource(R.dimen.padding_medium))
+            .semantics {
+                customActions = listOf(
+                    CustomAccessibilityAction(
+                        label = "Dismiss snackbar",
+                        action = { onDismiss(); true }
+                    )
+                )
+            }
             .offset { IntOffset(offsetX.value.roundToInt(), offsetY.value.roundToInt()) }
             .pointerInput(Unit) {
                 detectDragGestures(
@@ -91,13 +104,17 @@ fun DSSnackbar(
                     }
                 }
             }
-            .background(Color.Black, RoundedCornerShape(8.dp))
-            .padding(16.dp)
+            .background(Color.Black, RoundedCornerShape(dimensionResource(R.dimen.snackbar_corner_radius)))
+            .padding(dimensionResource(R.dimen.padding_medium))
     ) {
         when (val variation = data.variation) {
             is SnackbarVariation.Basic -> {
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    Text(text = variation.text, color = Color(0xFF00BFFF), fontSize = 16.sp)
+                    Text(
+                        text = variation.text,
+                        color = Color(0xFF00BFFF),
+                        fontSize = 16.sp // Sp cannot easily be dimenResource for text size without complexity
+                    )
                 }
             }
             is SnackbarVariation.WithIcon -> {

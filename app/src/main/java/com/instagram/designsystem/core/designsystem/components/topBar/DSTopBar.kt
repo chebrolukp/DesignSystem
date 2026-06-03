@@ -15,6 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
+import androidx.compose.ui.res.stringResource
+import com.instagram.designsystem.R
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DSTopBar(
@@ -62,8 +65,8 @@ fun DSTopBar(
                         onClick = variant.onBackClick
                     ) {
                         Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            null
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 },
@@ -84,7 +87,10 @@ fun DSTopBar(
                     IconButton(
                         onClick = variant.onActionClick
                     ) {
-                        Icon(Icons.Default.Add, null)
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = stringResource(R.string.add)
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(

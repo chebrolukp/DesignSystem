@@ -15,7 +15,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import com.instagram.designsystem.R
 
 @Composable
 fun BottomSheetCatalogScreen(modifier: Modifier = Modifier) {
@@ -32,17 +34,17 @@ fun BottomSheetCatalogScreen(modifier: Modifier = Modifier) {
                 sheets.add(SheetState(id = nextId++, size = SheetSize.Big, depth = 0))
             }
         ) {
-            Text("Launch Big Dialog")
+            Text(stringResource(R.string.launch_big_dialog))
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
 
         Button(
             onClick = {
                 sheets.add(SheetState(id = nextId++, size = SheetSize.Small, depth = 0))
             }
         ) {
-            Text("Launch Small Dialog")
+            Text(stringResource(R.string.launch_small_dialog))
         }
     }
 

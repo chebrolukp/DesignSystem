@@ -11,6 +11,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import com.instagram.designsystem.R
 import kotlinx.coroutines.delay
 
 @Composable
@@ -18,6 +21,12 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
     val snackbarQueue = remember { mutableStateListOf<SnackbarData>() }
     var currentSnackbar by remember { mutableStateOf<SnackbarData?>(null) }
     var nextId by remember { mutableLongStateOf(0L) }
+
+    val basicText = stringResource(R.string.basic_snackbar_text)
+    val iconText = stringResource(R.string.icon_snackbar_text)
+    val complexText = stringResource(R.string.complex_snackbar_text)
+    val option1Text = stringResource(R.string.option_1)
+    val option2Text = stringResource(R.string.option_2)
 
     // Logic to show snackbars one by one
     LaunchedEffect(currentSnackbar) {
@@ -48,16 +57,15 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // ... buttons ...
             Button(onClick = {
                 snackbarQueue.add(
                     SnackbarData(
                         id = nextId++,
-                        variation = SnackbarVariation.Basic("Middle Blue Text")
+                        variation = SnackbarVariation.Basic(basicText)
                     )
                 )
             }) {
-                Text("Basic Snackbar")
+                Text(stringResource(R.string.launch_basic_snackbar))
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -66,11 +74,11 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
                 snackbarQueue.add(
                     SnackbarData(
                         id = nextId++,
-                        variation = SnackbarVariation.WithIcon("Text and Icon", Icons.Default.Notifications)
+                        variation = SnackbarVariation.WithIcon(iconText, Icons.Default.Notifications)
                     )
                 )
             }) {
-                Text("Icon to Right Snackbar")
+                Text(stringResource(R.string.launch_icon_snackbar))
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -81,16 +89,16 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
                         id = nextId++,
                         variation = SnackbarVariation.Complex(
                             icon = Icons.Default.Star,
-                            text = "Complex Layout",
-                            topActionText = "Option 1",
-                            bottomActionText = "Option 2",
+                            text = complexText,
+                            topActionText = option1Text,
+                            bottomActionText = option2Text,
                             onTopActionClick = { println("Top Clicked") },
                             onBottomActionClick = { println("Bottom Clicked") }
                         )
                     )
                 )
             }) {
-                Text("Complex Snackbar")
+                Text(stringResource(R.string.launch_complex_snackbar))
             }
         }
 
@@ -98,7 +106,7 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = 16.dp),
+                .padding(bottom = dimensionResource(R.dimen.padding_medium)),
             contentAlignment = Alignment.BottomCenter
         ) {
             AnimatedContent(
