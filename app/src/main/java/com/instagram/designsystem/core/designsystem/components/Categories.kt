@@ -17,6 +17,10 @@ val categories = listOf(
         route = CatalogRoute.TopBars.route
     ),
     ComponentCategory(
+        title = "Expandable TopBar",
+        route = CatalogRoute.ExpandableTopBar.route
+    ),
+    ComponentCategory(
         title = "Bottom Sheets",
         route = CatalogRoute.BottomSheets.route
     )

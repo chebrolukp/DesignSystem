@@ -9,6 +9,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.instagram.designsystem.core.designsystem.components.button.ButtonCatalogScreen
+import com.instagram.designsystem.core.designsystem.components.topBar.ExpandableTopBarScreen
+import com.instagram.designsystem.core.designsystem.components.topBar.TopBarCatalogScreen
 import com.instagram.designsystem.feature.presentation.screen.CatalogHomeScreen
 
 @Composable
@@ -31,10 +33,14 @@ fun CatalogNavHost(padding: PaddingValues) {
             ButtonCatalogScreen(modifier)
         }
 
-//        composable(CatalogRoute.TopBars.route) {
-//            TopBarCatalogScreen()
-//        }
-//
+        composable(CatalogRoute.TopBars.route) {
+            TopBarCatalogScreen(modifier)
+        }
+
+        composable(CatalogRoute.ExpandableTopBar.route) {
+            ExpandableTopBarScreen(modifier)
+        }
+
 //        composable(CatalogRoute.BottomSheets.route) {
 //            BottomSheetCatalogScreen()
 //        }

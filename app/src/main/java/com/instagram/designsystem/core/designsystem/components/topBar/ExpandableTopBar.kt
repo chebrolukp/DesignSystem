@@ -1,0 +1,117 @@
+package com.instagram.designsystem.core.designsystem.components.topBar
+
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.lerp
+import androidx.compose.ui.unit.sp
+
+@Composable
+fun ExpandableTopBarScreen(modifier: Modifier = Modifier) {
+    val scrollState = rememberLazyListState()
+
+    // Max and min heights
+    val maxHeight = 120.dp
+    val minHeight = 64.dp
+    val maxHeightPx = with(LocalDensity.current) { maxHeight.toPx() }
+    val minHeightPx = with(LocalDensity.current) { minHeight.toPx() }
+
+    // Calculate the collapse fraction (0.0 to 1.0)
+    val collapseFraction by remember {
+        derivedStateOf {
+            if (scrollState.firstVisibleItemIndex > 0) {
+                1f
+            } else {
+                val scrollOffset = scrollState.firstVisibleItemScrollOffset.toFloat()
+                // Collapse faster or slower by adjusting this divisor
+                (scrollOffset / (maxHeightPx - minHeightPx)).coerceIn(0f, 1f)
+            }
+        }
+    }
+
+    // Smoothly animate the transitions
+    val animationSpec = spring<Float>(stiffness = Spring.StiffnessLow)
+    val dpAnimationSpec = spring<androidx.compose.ui.unit.Dp>(stiffness = Spring.StiffnessLow)
+
+    val animatedHeight by animateDpAsState(
+        targetValue = lerp(maxHeight, minHeight, collapseFraction),
+        animationSpec = dpAnimationSpec,
+        label = "height"
+    )
+
+    val animatedTextSizeValue by animateFloatAsState(
+        targetValue = lerp(34.sp, 18.sp, collapseFraction).value,
+        animationSpec = animationSpec,
+        label = "textSize"
+    )
+
+    val animatedBackgroundColor by animateColorAsState(
+        targetValue = lerp(
+            MaterialTheme.colorScheme.surfaceContainer,
+            MaterialTheme.colorScheme.surfaceContainerHighest,
+            collapseFraction
+        ),
+        label = "color"
+    )
+
+    Box(modifier = modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+        // Content
+        LazyColumn(
+            state = scrollState,
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            // Add a spacer to push content below the top bar initially
+            item {
+                Box(modifier = Modifier.height(maxHeight))
+            }
+            items(100) { index ->
+                Text(
+                    text = "Item $index",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+        }
+
+        // Expandable Top Bar
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(animatedHeight)
+                .background(animatedBackgroundColor)
+                .padding(horizontal = 16.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Text(
+                text = "Expandable Title",
+                fontSize = animatedTextSizeValue.sp,
+                style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
+    }
+}

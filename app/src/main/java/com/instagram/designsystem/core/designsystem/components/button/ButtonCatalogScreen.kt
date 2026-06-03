@@ -8,8 +8,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun ButtonCatalogScreen(modifier: Modifier) {
     Box(
-        modifier = modifier,
-        contentAlignment = Alignment.Center
+        modifier = modifier
     ) {
         AppButtonPreview()
     }

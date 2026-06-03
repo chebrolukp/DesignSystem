@@ -83,15 +83,3 @@ fun AppButtonPreview() {
         AppButton(text = "Secondary Round Enabled", enabled = false, style = ButtonStyle.Round(), variant = ButtonVariation.Secondary)
     }
 }
-
-sealed class ButtonStyle {
-    data object Text : ButtonStyle()
-    data class Round(
-        val imageVector: ImageVector = Icons.AutoMirrored.Filled.ArrowBack
-    ) : ButtonStyle()
-}
-
-sealed class ButtonVariation {
-    data object Primary : ButtonVariation()
-    data object Secondary : ButtonVariation()
-}
