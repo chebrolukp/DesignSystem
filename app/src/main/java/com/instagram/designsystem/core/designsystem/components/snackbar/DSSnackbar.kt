@@ -28,9 +28,14 @@ import kotlin.math.roundToInt
 
 sealed class SnackbarVariation {
     data class Basic(val text: String) : SnackbarVariation()
-    data class WithIcon(val text: String, val icon: ImageVector) : SnackbarVariation()
+    data class WithIcon(
+        val text: String,
+        val icon: ImageVector,
+        val iconContentDescription: String
+    ) : SnackbarVariation()
     data class Complex(
         val icon: ImageVector,
+        val iconContentDescription: String,
         val text: String,
         val topActionText: String,
         val bottomActionText: String,
@@ -124,7 +129,11 @@ fun DSSnackbar(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = variation.text, color = Color.White, modifier = Modifier.weight(1f))
-                    Icon(imageVector = variation.icon, contentDescription = null, tint = Color.White)
+                    Icon(
+                        imageVector = variation.icon,
+                        contentDescription = variation.iconContentDescription,
+                        tint = Color.White
+                    )
                 }
             }
             is SnackbarVariation.Complex -> {
@@ -132,7 +141,11 @@ fun DSSnackbar(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(imageVector = variation.icon, contentDescription = null, tint = Color.White)
+                    Icon(
+                        imageVector = variation.icon,
+                        contentDescription = variation.iconContentDescription,
+                        tint = Color.White
+                    )
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(text = variation.text, color = Color.White, modifier = Modifier.weight(1f))
                     Spacer(modifier = Modifier.width(12.dp))

@@ -2,6 +2,8 @@ package com.instagram.designsystem.core.designsystem.components.button
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -14,7 +16,7 @@ import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.preview.MultiPreview
 
 @Composable
-fun AppButton(
+fun DSButton(
     text: String,
     enabled: Boolean = true,
     style: ButtonStyle = ButtonStyle.Text,
@@ -49,7 +51,7 @@ fun AppButton(
             Icon(
                 imageVector = style.imageVector,
                 tint = if (enabled) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
-                contentDescription = text
+                contentDescription = style.contentDescription
             )
         }
     }
@@ -57,25 +59,41 @@ fun AppButton(
 
 @MultiPreview
 @Composable
-fun AppButtonPreview() {
+fun DSButtonPreview() {
     Column(verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))) {
         Text("Primary")
-        AppButton("Primary Enabled")
-        AppButton("Primary Disabled", enabled = false)
+        DSButton("Primary Enabled")
+        DSButton("Primary Disabled", enabled = false)
         HorizontalDivider()
 
         Text("Secondary")
-        AppButton("Secondary Enabled", variant = ButtonVariation.Secondary)
-        AppButton("Secondary Disabled", enabled = false, variant = ButtonVariation.Secondary)
+        DSButton("Secondary Enabled", variant = ButtonVariation.Secondary)
+        DSButton("Secondary Disabled", enabled = false, variant = ButtonVariation.Secondary)
         HorizontalDivider()
 
         Text("Primary Round Enabled")
-        AppButton(text = "Primary Round Enabled", style = ButtonStyle.Round())
-        AppButton(text = "Primary Round Enabled", enabled = false, style = ButtonStyle.Round())
+        DSButton(
+            text = "Primary Round Enabled",
+            style = ButtonStyle.Round(Icons.Default.Favorite, "Favorite")
+        )
+        DSButton(
+            text = "Primary Round Enabled",
+            enabled = false,
+            style = ButtonStyle.Round(Icons.Default.Favorite, "Favorite")
+        )
         HorizontalDivider()
 
         Text("Secondary Round Disabled")
-        AppButton(text = "Secondary Round Enabled", style = ButtonStyle.Round(), variant = ButtonVariation.Secondary)
-        AppButton(text = "Secondary Round Enabled", enabled = false, style = ButtonStyle.Round(), variant = ButtonVariation.Secondary)
+        DSButton(
+            text = "Secondary Round Enabled",
+            style = ButtonStyle.Round(Icons.Default.Favorite, "Favorite"),
+            variant = ButtonVariation.Secondary
+        )
+        DSButton(
+            text = "Secondary Round Enabled",
+            enabled = false,
+            style = ButtonStyle.Round(Icons.Default.Favorite, "Favorite"),
+            variant = ButtonVariation.Secondary
+        )
     }
 }

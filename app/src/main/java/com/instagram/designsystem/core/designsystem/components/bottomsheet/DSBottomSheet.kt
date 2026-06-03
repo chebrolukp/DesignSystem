@@ -23,11 +23,14 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.instagram.designsystem.R
+import kotlinx.coroutines.launch
+import androidx.compose.ui.unit.dp
 
 enum class SheetSize {
     Big, Small
@@ -50,6 +53,7 @@ fun AppBottomSheet(
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = size == SheetSize.Big
     )
+    val scope = rememberCoroutineScope()
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -92,7 +96,13 @@ fun AppBottomSheet(
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.weight(1f)
                 )
-                IconButton(onClick = onDismiss) {
+                IconButton(onClick = {
+                    scope.launch { sheetState.hide() }.invokeOnCompletion {
+                        if (!sheetState.isVisible) {
+                            onDismiss()
+                        }
+                    }
+                }) {
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = stringResource(R.string.close)

@@ -74,7 +74,11 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
                 snackbarQueue.add(
                     SnackbarData(
                         id = nextId++,
-                        variation = SnackbarVariation.WithIcon(iconText, Icons.Default.Notifications)
+                        variation = SnackbarVariation.WithIcon(
+                            text = iconText,
+                            icon = Icons.Default.Notifications,
+                            iconContentDescription = "Notifications"
+                        )
                     )
                 )
             }) {
@@ -89,6 +93,7 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
                         id = nextId++,
                         variation = SnackbarVariation.Complex(
                             icon = Icons.Default.Star,
+                            iconContentDescription = "Star",
                             text = complexText,
                             topActionText = option1Text,
                             bottomActionText = option2Text,
