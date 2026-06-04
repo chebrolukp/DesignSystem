@@ -8,11 +8,11 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
@@ -50,6 +50,13 @@ data class SnackbarData(
     val durationMillis: Long = 4000 // Standard "Short" duration
 )
 
+/**
+ * A custom snackbar component that supports swipe-to-dismiss in multiple directions
+ * and various content variations.
+ *
+ * @param data The [SnackbarData] containing the variation and metadata for the snackbar.
+ * @param onDismiss Callback invoked when the snackbar is dismissed (via timeout or swipe).
+ */
 @Composable
 fun DSSnackbar(
     data: SnackbarData,
@@ -109,7 +116,10 @@ fun DSSnackbar(
                     }
                 }
             }
-            .background(Color.Black, RoundedCornerShape(dimensionResource(R.dimen.snackbar_corner_radius)))
+            .background(
+                MaterialTheme.colorScheme.inverseSurface,
+                RoundedCornerShape(dimensionResource(R.dimen.snackbar_corner_radius))
+            )
             .padding(dimensionResource(R.dimen.padding_medium))
     ) {
         when (val variation = data.variation) {
@@ -117,7 +127,7 @@ fun DSSnackbar(
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                     Text(
                         text = variation.text,
-                        color = Color(0xFF00BFFF),
+                        color = MaterialTheme.colorScheme.secondary,
                         fontSize = 16.sp // Sp cannot easily be dimenResource for text size without complexity
                     )
                 }
@@ -128,11 +138,15 @@ fun DSSnackbar(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = variation.text, color = Color.White, modifier = Modifier.weight(1f))
+                    Text(
+                        text = variation.text,
+                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                        modifier = Modifier.weight(1f)
+                    )
                     Icon(
                         imageVector = variation.icon,
                         contentDescription = variation.iconContentDescription,
-                        tint = Color.White
+                        tint = MaterialTheme.colorScheme.inverseOnSurface
                     )
                 }
             }
@@ -144,15 +158,25 @@ fun DSSnackbar(
                     Icon(
                         imageVector = variation.icon,
                         contentDescription = variation.iconContentDescription,
-                        tint = Color.White
+                        tint = MaterialTheme.colorScheme.inverseOnSurface
                     )
                     Spacer(modifier = Modifier.width(12.dp))
-                    Text(text = variation.text, color = Color.White, modifier = Modifier.weight(1f))
+                    Text(
+                        text = variation.text,
+                        color = MaterialTheme.colorScheme.inverseOnSurface,
+                        modifier = Modifier.weight(1f)
+                    )
                     Spacer(modifier = Modifier.width(12.dp))
                     Column(horizontalAlignment = Alignment.End) {
-                        ActionTextBox(text = variation.topActionText, onClick = variation.onTopActionClick)
+                        ActionTextBox(
+                            text = variation.topActionText,
+                            onClick = variation.onTopActionClick
+                        )
                         Spacer(modifier = Modifier.height(8.dp))
-                        ActionTextBox(text = variation.bottomActionText, onClick = variation.onBottomActionClick)
+                        ActionTextBox(
+                            text = variation.bottomActionText,
+                            onClick = variation.onBottomActionClick
+                        )
                     }
                 }
             }
@@ -164,10 +188,18 @@ fun DSSnackbar(
 fun ActionTextBox(text: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
-            .border(1.dp, Color(0xFF00BFFF), RoundedCornerShape(4.dp))
+            .border(
+                1.dp,
+                MaterialTheme.colorScheme.secondary,
+                RoundedCornerShape(4.dp)
+            )
             .clickable { onClick() }
             .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
-        Text(text = text, color = Color(0xFF00BFFF), fontSize = 12.sp)
+        Text(
+            text = text,
+            color = MaterialTheme.colorScheme.secondary,
+            fontSize = 12.sp
+        )
     }
 }

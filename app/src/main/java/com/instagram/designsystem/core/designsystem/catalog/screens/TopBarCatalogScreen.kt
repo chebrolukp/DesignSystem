@@ -1,4 +1,4 @@
-package com.instagram.designsystem.core.designsystem.components.topBar
+package com.instagram.designsystem.core.designsystem.catalog.screens
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.instagram.designsystem.R
+import com.instagram.designsystem.core.designsystem.components.topBar.DSTopBar
+import com.instagram.designsystem.core.designsystem.components.topBar.TopBarVariant
 
 /**
  * The TopAppBar in Material 3 includes default window insets (specifically for the status bar) which adds extra padding at the top.

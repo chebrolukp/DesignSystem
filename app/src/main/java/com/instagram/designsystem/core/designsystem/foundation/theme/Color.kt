@@ -1,4 +1,4 @@
-package com.instagram.designsystem.core.designsystem.theme
+package com.instagram.designsystem.core.designsystem.foundation.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -10,6 +10,9 @@ val Black = Color(0xFF000000)
 
 val SurfaceLight = Color(0xFFFFFFFF)
 val SurfaceDark = Color(0xFF121212)
+
+val LightGray = Color(0xFFD3D3D3)
+val DeepSkyBlue = Color(0xFF00BFFF)
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)

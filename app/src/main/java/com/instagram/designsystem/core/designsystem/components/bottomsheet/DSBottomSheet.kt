@@ -32,7 +32,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import com.instagram.designsystem.R
 import kotlinx.coroutines.launch
-import androidx.compose.ui.unit.dp
 
 enum class SheetSize {
     Big, Small
@@ -44,9 +43,17 @@ data class SheetState(
     val depth: Int = 0,
 )
 
+/**
+ * A modal bottom sheet that supports different sizes and depth-based stacking.
+ *
+ * @param size The [SheetSize] of the bottom sheet (Big or Small).
+ * @param depth The current stacking depth, used to calculate offsets for multiple open sheets.
+ * @param onDismiss Callback invoked when the sheet should be dismissed.
+ * @param onLaunchNext Callback to trigger a new bottom sheet on top of the current one.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBottomSheet(
+fun DSBottomSheet(
     size: SheetSize,
     depth: Int,
     onDismiss: () -> Unit,

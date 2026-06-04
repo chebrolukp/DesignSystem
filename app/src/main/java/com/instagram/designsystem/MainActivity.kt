@@ -7,8 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.instagram.designsystem.core.designsystem.navigation.CatalogNavHost
-import com.instagram.designsystem.core.designsystem.theme.DesignSystemTheme
+import com.instagram.designsystem.core.designsystem.catalog.navigation.CatalogNavHost
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

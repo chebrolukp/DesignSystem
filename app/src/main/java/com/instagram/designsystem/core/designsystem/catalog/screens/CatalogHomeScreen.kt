@@ -1,4 +1,4 @@
-package com.instagram.designsystem.feature.presentation.screen
+package com.instagram.designsystem.core.designsystem.catalog.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn

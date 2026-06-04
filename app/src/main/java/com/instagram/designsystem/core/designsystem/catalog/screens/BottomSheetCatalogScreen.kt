@@ -1,4 +1,4 @@
-package com.instagram.designsystem.core.designsystem.components.bottomsheet
+package com.instagram.designsystem.core.designsystem.catalog.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,8 +9,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -18,6 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.instagram.designsystem.R
+import com.instagram.designsystem.core.designsystem.components.bottomsheet.DSBottomSheet
+import com.instagram.designsystem.core.designsystem.components.bottomsheet.SheetSize
+import com.instagram.designsystem.core.designsystem.components.bottomsheet.SheetState
 
 @Composable
 fun BottomSheetCatalogScreen(modifier: Modifier = Modifier) {
@@ -50,7 +53,7 @@ fun BottomSheetCatalogScreen(modifier: Modifier = Modifier) {
 
     // Render active sheets
     sheets.forEachIndexed { index, sheet ->
-        AppBottomSheet(
+        DSBottomSheet(
             size = sheet.size,
             depth = sheet.depth,
             onDismiss = {

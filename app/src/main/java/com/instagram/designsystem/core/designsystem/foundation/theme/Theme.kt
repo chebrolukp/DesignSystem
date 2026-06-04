@@ -1,4 +1,4 @@
-package com.instagram.designsystem.core.designsystem.theme
+package com.instagram.designsystem.core.designsystem.foundation.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -12,34 +12,29 @@ import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
-    secondary = PurpleGrey80,
+    secondary = DeepSkyBlue,
     tertiary = Pink80,
     background = SurfaceDark,
-    surface = SurfaceDark
+    surface = SurfaceDark,
+    inverseSurface = White,
+    inverseOnSurface = Black,
+    surfaceContainer = SurfaceDark
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
-    secondary = PurpleGrey40,
+    secondary = DeepSkyBlue,
     tertiary = Pink40,
     background = SurfaceLight,
-    surface = SurfaceLight
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    surface = SurfaceLight,
+    inverseSurface = Black,
+    inverseOnSurface = White,
+    surfaceContainer = LightGray
 )
 
 @Composable
 fun DesignSystemTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -55,7 +50,7 @@ fun DesignSystemTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = AppTypography,
         content = content
     )
 }

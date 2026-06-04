@@ -1,4 +1,4 @@
-package com.instagram.designsystem.core.designsystem.components.snackbar
+package com.instagram.designsystem.core.designsystem.catalog.screens
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
@@ -10,12 +10,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.instagram.designsystem.R
-import com.instagram.designsystem.core.designsystem.components.animation.dsEnterFromRight
-import com.instagram.designsystem.core.designsystem.components.animation.dsExitToRight
+import com.instagram.designsystem.core.designsystem.foundation.animation.dsEnterFromRight
+import com.instagram.designsystem.core.designsystem.foundation.animation.dsExitToRight
+import com.instagram.designsystem.core.designsystem.components.snackbar.DSSnackbar
+import com.instagram.designsystem.core.designsystem.components.snackbar.SnackbarData
+import com.instagram.designsystem.core.designsystem.components.snackbar.SnackbarVariation
 import kotlinx.coroutines.delay
 
 @Composable
@@ -70,7 +72,7 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
                 Text(stringResource(R.string.launch_basic_snackbar))
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
 
             Button(onClick = {
                 snackbarQueue.add(
@@ -87,7 +89,7 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
                 Text(stringResource(R.string.launch_icon_snackbar))
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
 
             Button(onClick = {
                 snackbarQueue.add(

@@ -1,4 +1,4 @@
-package com.instagram.designsystem.core.designsystem.navigation
+package com.instagram.designsystem.core.designsystem.catalog.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -8,12 +8,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.instagram.designsystem.core.designsystem.components.bottomsheet.BottomSheetCatalogScreen
-import com.instagram.designsystem.core.designsystem.components.snackbar.SnackbarCatalogScreen
-import com.instagram.designsystem.core.designsystem.components.button.ButtonCatalogScreen
-import com.instagram.designsystem.core.designsystem.components.topBar.ExpandableTopBarScreen
-import com.instagram.designsystem.core.designsystem.components.topBar.TopBarCatalogScreen
-import com.instagram.designsystem.feature.presentation.screen.CatalogHomeScreen
+import com.instagram.designsystem.core.designsystem.catalog.screens.BottomSheetCatalogScreen
+import com.instagram.designsystem.core.designsystem.catalog.screens.ButtonCatalogScreen
+import com.instagram.designsystem.core.designsystem.catalog.screens.CatalogHomeScreen
+import com.instagram.designsystem.core.designsystem.catalog.screens.ExpandableTopBarCatalogScreen
+import com.instagram.designsystem.core.designsystem.catalog.screens.SnackbarCatalogScreen
+import com.instagram.designsystem.core.designsystem.catalog.screens.TopBarCatalogScreen
 
 @Composable
 fun CatalogNavHost(padding: PaddingValues) {
@@ -40,7 +40,7 @@ fun CatalogNavHost(padding: PaddingValues) {
         }
 
         composable(CatalogRoute.ExpandableTopBar.route) {
-            ExpandableTopBarScreen(modifier)
+            ExpandableTopBarCatalogScreen(modifier)
         }
 
         composable(CatalogRoute.BottomSheets.route) {

@@ -44,13 +44,19 @@ Standardized animation specs and transitions used across the system:
 ---
 
 ## 📂 Project Structure
-- `core/designsystem/components/`: Core UI library.
-  - `animation/`: Centralized `DSAnimations`.
-  - `snackbar/`: `DSSnackbar` and queue management.
-  - `bottomsheet/`: `DSBottomSheet` and depth stacking.
-  - `topBar/`: `DSTopBar` and scroll-reactive headers.
-- `feature/presentation/screen/`: Component-specific catalog screens.
-- `navigation/`: Route definitions and `CatalogNavHost`.
+The project is organized into three distinct layers to ensure scalability and maintainability:
+
+- **`foundation/`**: The atomic building blocks of the design system.
+  - `theme/`: Design tokens for Colors, Typography, and the global `DesignSystemTheme`.
+  - `animation/`: Centralized `DSAnimations` defining semantic motion specs like `dsExpand()` and `dsCollapse()`.
+- **`components/`**: Purely reusable UI components that consume foundation tokens.
+  - `button/`: [DSButton] with primary/secondary and text/round styles.
+  - `snackbar/`: [DSSnackbar] with auto-queueing and multi-directional swipe logic.
+  - `bottomsheet/`: [DSBottomSheet] with recursive stacking and animated dismissal.
+  - `topBar/`: [DSTopBar] and [DSExpandableTopBar] scroll-reactive headers.
+- **`catalog/`**: A "showroom" app layer used for development and documentation.
+  - `screens/`: Isolated preview screens for testing every component variation.
+  - `navigation/`: Internal navigation logic for the catalog browser.
 
 ---
 
@@ -62,7 +68,9 @@ Standardized animation specs and transitions used across the system:
 
 ## 📝 Usage Example (Expandable Top Bar)
 ```kotlin
-ExpandableTopBarScreen(
-    modifier = Modifier.fillMaxSize()
+// Reusable component
+DSExpandableTopBar(
+    title = "My Page Title",
+    collapseFraction = scrollState.fraction // Values 0.0 to 1.0
 )
 ```

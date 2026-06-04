@@ -1,4 +1,4 @@
-package com.instagram.designsystem.core.designsystem.navigation
+package com.instagram.designsystem.core.designsystem.catalog.navigation
 
 sealed class CatalogRoute(val route: String) {
     data object Home : CatalogRoute("home")

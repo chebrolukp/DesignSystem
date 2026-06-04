@@ -2,8 +2,14 @@ package com.instagram.designsystem.core.designsystem.components
 
 import androidx.annotation.StringRes
 import com.instagram.designsystem.R
-import com.instagram.designsystem.core.designsystem.navigation.CatalogRoute
+import com.instagram.designsystem.core.designsystem.catalog.navigation.CatalogRoute
 
+/**
+ * Represents a category of components in the design system catalog.
+ *
+ * @property titleRes The resource ID of the string to be displayed as the category title.
+ * @property route The navigation route associated with this category.
+ */
 data class ComponentCategory(
     @StringRes val titleRes: Int,
     val route: String

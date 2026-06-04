@@ -8,16 +8,22 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-
 import androidx.compose.ui.res.stringResource
 import com.instagram.designsystem.R
 
+/**
+ * A reusable TopAppBar component that supports different variations like Simple, Back, and Action.
+ *
+ * @param variant The [TopBarVariant] to be displayed.
+ * @param modifier The modifier to be applied to the top app bar.
+ * @param windowInsets The window insets to be applied to the top app bar.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DSTopBar(
@@ -35,7 +41,7 @@ fun DSTopBar(
                     Text(variant.title)
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.LightGray
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer
                 )
             )
         }
@@ -48,7 +54,7 @@ fun DSTopBar(
                     Text(variant.title)
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.LightGray
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer
                 )
             )
         }
@@ -71,7 +77,7 @@ fun DSTopBar(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.LightGray
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer
                 )
             )
         }
@@ -94,7 +100,7 @@ fun DSTopBar(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.LightGray
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer
                 )
             )
         }
