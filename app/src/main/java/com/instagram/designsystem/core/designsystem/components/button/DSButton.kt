@@ -2,8 +2,6 @@ package com.instagram.designsystem.core.designsystem.components.button
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -83,26 +81,26 @@ fun DSButtonPreview() {
 
         Text("Primary Round Enabled")
         DSButton(
-            text = "Primary Round Enabled",
-            style = ButtonStyle.Round(Icons.Default.Favorite, "Favorite")
+            text = "Back",
+            style = ButtonStyle.Round()
         )
         DSButton(
-            text = "Primary Round Enabled",
+            text = "Back",
             enabled = false,
-            style = ButtonStyle.Round(Icons.Default.Favorite, "Favorite")
+            style = ButtonStyle.Round()
         )
         HorizontalDivider()
 
         Text("Secondary Round Disabled")
         DSButton(
-            text = "Secondary Round Enabled",
-            style = ButtonStyle.Round(Icons.Default.Favorite, "Favorite"),
+            text = "Back",
+            style = ButtonStyle.Round(),
             variant = ButtonVariation.Secondary
         )
         DSButton(
-            text = "Secondary Round Enabled",
+            text = "Back",
             enabled = false,
-            style = ButtonStyle.Round(Icons.Default.Favorite, "Favorite"),
+            style = ButtonStyle.Round(),
             variant = ButtonVariation.Secondary
         )
     }
