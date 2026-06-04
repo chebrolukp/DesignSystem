@@ -1,64 +1,68 @@
 # DesignSystem Component Catalog
 
-A modular Jetpack Compose design system featuring reusable components with advanced animations, layout behaviors, and a built-in catalog for previewing variations.
+A modular Jetpack Compose design system featuring reusable components with advanced animations, semantic layout behaviors, and a built-in catalog for previewing variations.
 
 ## 🚀 Key Features
 
-### 🛠 Components
+### 🛠 Reusable Components
 - **Advanced Snackbars**:
-  - Three variations: Basic (Centered), Icon-Right, and Complex (Action Column).
-  - **Auto-Queue Logic**: Displays snackbars one by one with a "Short" duration (4s).
-  - **Slide-in Animation**: Always slides in from the right edge as a solid unit.
-  - **3-Way Swipe-to-Dismiss**: Supports swiping Left, Right, or Down to clear.
+  - Three variations: **Basic** (Centered), **WithIcon**, and **Complex** (Action Column).
+  - **Auto-Queue Logic**: Displays snackbars sequentially with a standardized 4s duration.
+  - **Slide-in Animation**: Always slides in from the right edge as a solid unit using `AnimatedContent`.
+  - **3-Way Swipe-to-Dismiss**: Supports swiping Left, Right, or Down with directional off-screen animations.
 - **Adaptive Bottom Sheets**:
-  - **Big Style**: Full-screen overlap with a top bar and close icon.
-  - **Small Style**: Fixed height (approx. half-screen) with drag handle and close icon.
-  - **Stacking Logic**: Recursive launching with depth-based offsets (2dp for Big, 5dp for Small).
+  - **Big Style**: Full-screen overlap with automatic Status Bar padding (WindowInsets) and a close icon.
+  - **Small Style**: Fixed height (approx. half-screen) with a drag handle and close icon.
+  - **Stacking Logic**: Recursive launching with depth-based offsets (**8dp** for Big, **5dp** for Small height reduction).
+  - **Animated Dismissal**: Explicitly handles `hide()` transitions before clearing from state.
 - **Expandable Top Bar**:
-  - Collapses smoothly from `120dp` (34sp title) to `64dp` (18sp title) on scroll.
-  - Uses `lerp` interpolation for smooth color and size transitions.
-- **Top Bars**: Simple, Back, and Action variations with configurable WindowInsets.
-- **App Buttons**: Supporting Text and Round (Icon) styles with Material 3 variations.
+  - Collapses smoothly from `120dp` (34sp title) to `64dp` (18sp title) based on scroll progress.
+  - Uses `lerp` (Linear Interpolation) to synchronize height, font size, and background color transitions.
+- **Standard Top Bars**: Simple, Back, and Action variations with configurable `WindowInsets` for catalog vs. app usage.
+- **App Buttons**: Supporting Text and Round (Icon) styles with mandatory accessibility labels.
 
-### 📱 Catalog App
-The project includes a `CatalogHomeScreen` that categorizes all components, making it easy to test interactions like snackbar queuing and bottom sheet stacking in isolation.
+### 🎭 Centralized Animations (`DSAnimations.kt`)
+Standardized animation specs and transitions used across the system:
+- `dsExpand()` / `dsCollapse()`: Descriptive spring specs for sizing changes.
+- `dsEnterFromRight()` / `dsExitToRight()`: Unified horizontal slide + fade transitions.
+
+### ♿ Accessibility & Localization
+- **Zero Hardcoding**: All strings and dimensions are moved to `strings.xml` and `dimens.xml` for easy scaling and translation.
+- **Mandatory Content Descriptions**: Components with images strictly enforce `contentDescription` arguments.
+- **Semantic States**: Dynamic components use `stateDescription` (e.g., "Expanded", "Stack depth 2") to inform assistive technologies.
+- **Custom Semantic Actions**: Snackbars include accessibility actions for dismissal without requiring gestures.
 
 ---
 
 ## 🛠 Tech Stack
-- **Jetpack Compose**: UI Framework.
-- **Material 3**: Base design system and components.
-- **Navigation Compose**: Type-safe navigation between catalog screens.
-- **Kotlin Coroutines**: Manages snackbar queue timing and animations.
-- **Compose Animation API**: High-level `AnimatedContent` and low-level `Animatable` for swipe gestures.
+- **Jetpack Compose**: Modern declarative UI framework.
+- **Material 3**: Foundation for the design system components.
+- **Navigation Compose**: Type-safe navigation for the catalog app.
+- **Kotlin Coroutines**: Powering queue delays and coordinated animations.
+- **Version Catalog**: Managed dependencies via `libs.versions.toml`.
 
 ---
 
 ## 📂 Project Structure
-- `core/designsystem/components/`: Source code for all reusable UI components.
-  - `snackbar/`: `DSSnackbar` and its queue management logic.
-  - `bottomsheet/`: `AppBottomSheet` and stacking implementation.
-  - `topBar/`: `DSTopBar` and `ExpandableTopBar`.
-- `feature/presentation/screen/`: Catalog screens for previewing components.
-- `navigation/`: Route definitions and `NavHost` setup.
+- `core/designsystem/components/`: Core UI library.
+  - `animation/`: Centralized `DSAnimations`.
+  - `snackbar/`: `DSSnackbar` and queue management.
+  - `bottomsheet/`: `DSBottomSheet` and depth stacking.
+  - `topBar/`: `DSTopBar` and scroll-reactive headers.
+- `feature/presentation/screen/`: Component-specific catalog screens.
+- `navigation/`: Route definitions and `CatalogNavHost`.
 
 ---
 
 ## 🏁 Getting Started
 1. Clone the repository.
 2. Open in **Android Studio Ladybug (or newer)**.
-3. Sync Gradle (Uses Version Catalogs in `libs.versions.toml`).
-4. Run the `:app` module.
+3. Sync Gradle (Uses Version Catalogs).
+4. Run the `:app` module to browse the catalog.
 
-## 📝 Usage Example (Snackbar)
+## 📝 Usage Example (Expandable Top Bar)
 ```kotlin
-snackbarQueue.add(
-    SnackbarData(
-        id = nextId++,
-        variation = SnackbarVariation.WithIcon(
-            text = "Notification Received", 
-            icon = Icons.Default.Notifications
-        )
-    )
+ExpandableTopBarScreen(
+    modifier = Modifier.fillMaxSize()
 )
 ```
