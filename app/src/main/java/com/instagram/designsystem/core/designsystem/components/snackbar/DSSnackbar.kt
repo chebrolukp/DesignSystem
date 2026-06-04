@@ -23,6 +23,7 @@ import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
 import com.instagram.designsystem.R
+import com.instagram.designsystem.core.designsystem.foundation.theme.LocalDesignSystemColors
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -127,7 +128,7 @@ fun DSSnackbar(
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                     Text(
                         text = variation.text,
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = LocalDesignSystemColors.current.basicSnackbarText,
                         fontSize = 16.sp // Sp cannot easily be dimenResource for text size without complexity
                     )
                 }
@@ -186,11 +187,12 @@ fun DSSnackbar(
 
 @Composable
 fun ActionTextBox(text: String, onClick: () -> Unit) {
+    val actionColor = LocalDesignSystemColors.current.snackbarAction
     Box(
         modifier = Modifier
             .border(
                 1.dp,
-                MaterialTheme.colorScheme.secondary,
+                actionColor,
                 RoundedCornerShape(4.dp)
             )
             .clickable { onClick() }
@@ -198,7 +200,7 @@ fun ActionTextBox(text: String, onClick: () -> Unit) {
     ) {
         Text(
             text = text,
-            color = MaterialTheme.colorScheme.secondary,
+            color = actionColor,
             fontSize = 12.sp
         )
     }

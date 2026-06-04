@@ -4,7 +4,7 @@
 
     <!-- Snackbar Strings -->
     <string name="dismiss_snackbar">Dismiss snackbar</string>
-    <string name="basic_snackbar_text">Middle Blue Text</string>
+    <string name="basic_snackbar_text">Basic Message</string>
     <string name="icon_snackbar_text">Text and Icon</string>
     <string name="complex_snackbar_text">Complex Layout</string>
     <string name="option_1">Option 1</string>
