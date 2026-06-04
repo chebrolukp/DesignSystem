@@ -8,7 +8,7 @@
     <dimen name="topbar_min_height">64.dp</dimen>
 
     <dimen name="bottom_sheet_small_height">400.dp</dimen>
-    <dimen name="bottom_sheet_depth_big_offset">2.dp</dimen>
+    <dimen name="bottom_sheet_depth_big_offset">8.dp</dimen>
     <dimen name="bottom_sheet_depth_small_offset">5.dp</dimen>
 
     <dimen name="snackbar_corner_radius">8.dp</dimen>
