@@ -19,7 +19,7 @@ A modular Jetpack Compose design system featuring reusable components with advan
   - Collapses smoothly from `120dp` (34sp title) to `64dp` (18sp title) based on scroll progress.
   - Uses `lerp` (Linear Interpolation) to synchronize height, font size, and background color transitions.
 - **Standard Top Bars**: Simple, Back, and Action variations with configurable `WindowInsets` for catalog vs. app usage.
-- **App Buttons**: Supporting Text and Round (Icon) styles with mandatory accessibility labels.
+- **App Buttons**: Supporting Text and Round (Icon) styles with mandatory accessibility labels and "Back" arrow defaults.
 
 ### 🎭 Centralized Animations (`DSAnimations.kt`)
 Standardized animation specs and transitions used across the system:
@@ -30,16 +30,16 @@ Standardized animation specs and transitions used across the system:
 - **Zero Hardcoding**: All strings and dimensions are moved to `strings.xml` and `dimens.xml` for easy scaling and translation.
 - **Mandatory Content Descriptions**: Components with images strictly enforce `contentDescription` arguments.
 - **Semantic States**: Dynamic components use `stateDescription` (e.g., "Expanded", "Stack depth 2") to inform assistive technologies.
-- **Custom Semantic Actions**: Snackbars include accessibility actions for dismissal without requiring gestures.
+- **Custom Semantic Actions**: Snackbars include accessibility actions for dismissal without requiring physical gestures.
 
 ---
 
 ## 🛠 Tech Stack
 - **Jetpack Compose**: Modern declarative UI framework.
-- **Material 3**: Foundation for the design system components.
+- **Material 3**: Foundation for the theme-aware component library.
 - **Navigation Compose**: Type-safe navigation for the catalog app.
 - **Kotlin Coroutines**: Powering queue delays and coordinated animations.
-- **Version Catalog**: Managed dependencies via `libs.versions.toml`.
+- **Version Catalog**: Centralized dependency management via `libs.versions.toml`.
 
 ---
 
@@ -47,8 +47,8 @@ Standardized animation specs and transitions used across the system:
 The project is organized into three distinct layers to ensure scalability and maintainability:
 
 - **`foundation/`**: The atomic building blocks of the design system.
-  - `theme/`: Design tokens for Colors, Typography, and the global `DesignSystemTheme`.
-  - `animation/`: Centralized `DSAnimations` defining semantic motion specs like `dsExpand()` and `dsCollapse()`.
+  - `theme/`: Design tokens for Colors, Typography (`AppTypography`), and the global `DesignSystemTheme`.
+  - `animation/`: Centralized `DSAnimations` defining semantic motion specs.
 - **`components/`**: Purely reusable UI components that consume foundation tokens.
   - `button/`: [DSButton] with primary/secondary and text/round styles.
   - `snackbar/`: [DSSnackbar] with auto-queueing and multi-directional swipe logic.
@@ -56,9 +56,14 @@ The project is organized into three distinct layers to ensure scalability and ma
   - `topBar/`: [DSTopBar] and [DSExpandableTopBar] scroll-reactive headers.
 - **`catalog/`**: A "showroom" app layer used for development and documentation.
   - `screens/`: Isolated preview screens for testing every component variation.
-  - `navigation/`: Internal navigation logic for the catalog browser.
+  - `navigation/`: Internal navigation logic and routes for the catalog browser.
 
 ---
+
+## 📖 Development Best Practices
+- **Documentation**: All core components include KDoc headers describing parameters and behavior.
+- **Theme Awareness**: Components use `MaterialTheme.colorScheme` instead of hardcoded colors, supporting Light and Dark modes natively.
+- **Encapsulation**: Catalog code is strictly separated from library code to prevent leaking demo logic into production.
 
 ## 🏁 Getting Started
 1. Clone the repository.
@@ -68,9 +73,9 @@ The project is organized into three distinct layers to ensure scalability and ma
 
 ## 📝 Usage Example (Expandable Top Bar)
 ```kotlin
-// Reusable component
+// Reusable component usage
 DSExpandableTopBar(
     title = "My Page Title",
-    collapseFraction = scrollState.fraction // Values 0.0 to 1.0
+    collapseFraction = scrollState.fraction // Derived from scroll offset
 )
 ```
