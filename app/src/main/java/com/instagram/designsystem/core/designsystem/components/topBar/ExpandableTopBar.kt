@@ -1,10 +1,8 @@
 package com.instagram.designsystem.core.designsystem.components.topBar
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,18 +21,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.lerp
-import androidx.compose.ui.unit.sp
-
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
+import androidx.compose.ui.unit.lerp
+import androidx.compose.ui.unit.sp
 import com.instagram.designsystem.R
+import com.instagram.designsystem.core.designsystem.components.animation.dsExpand
 
 @Composable
 fun ExpandableTopBarScreen(modifier: Modifier = Modifier) {
     val scrollState = rememberLazyListState()
 
-    // Max and min heights
+    // ... dimen calculations ...
     val maxHeight = dimensionResource(R.dimen.topbar_max_height)
     val minHeight = dimensionResource(R.dimen.topbar_min_height)
     val maxHeightPx = with(LocalDensity.current) { maxHeight.toPx() }
@@ -54,18 +54,15 @@ fun ExpandableTopBarScreen(modifier: Modifier = Modifier) {
     }
 
     // Smoothly animate the transitions
-    val animationSpec = spring<Float>(stiffness = Spring.StiffnessLow)
-    val dpAnimationSpec = spring<androidx.compose.ui.unit.Dp>(stiffness = Spring.StiffnessLow)
-
     val animatedHeight by animateDpAsState(
         targetValue = lerp(maxHeight, minHeight, collapseFraction),
-        animationSpec = dpAnimationSpec,
+        animationSpec = dsExpand(),
         label = "height"
     )
 
     val animatedTextSizeValue by animateFloatAsState(
         targetValue = lerp(34.sp, 18.sp, collapseFraction).value,
-        animationSpec = animationSpec,
+        animationSpec = dsExpand(),
         label = "textSize"
     )
 
@@ -101,12 +98,17 @@ fun ExpandableTopBarScreen(modifier: Modifier = Modifier) {
         }
 
         // Expandable Top Bar
+        val expandedDescription = stringResource(R.string.expanded)
+        val collapsedDescription = stringResource(R.string.collapsed)
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(animatedHeight)
                 .background(animatedBackgroundColor)
-                .padding(horizontal = dimensionResource(R.dimen.padding_medium)),
+                .padding(horizontal = dimensionResource(R.dimen.padding_medium))
+                .semantics {
+                    stateDescription = if (collapseFraction < 0.5f) expandedDescription else collapsedDescription
+                },
             contentAlignment = Alignment.CenterStart
         ) {
             Text(

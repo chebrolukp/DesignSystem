@@ -28,6 +28,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import com.instagram.designsystem.R
 import kotlinx.coroutines.launch
 import androidx.compose.ui.unit.dp
@@ -54,6 +56,7 @@ fun AppBottomSheet(
         skipPartiallyExpanded = size == SheetSize.Big
     )
     val scope = rememberCoroutineScope()
+    val depthDescription = stringResource(R.string.stack_depth, depth)
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -62,12 +65,14 @@ fun AppBottomSheet(
         contentWindowInsets = {
             if (size == SheetSize.Big) BottomSheetDefaults.windowInsets else WindowInsets(0, 0, 0, 0)
         },
-        modifier = if (size == SheetSize.Big) {
+        modifier = (if (size == SheetSize.Big) {
             Modifier
                 .fillMaxHeight()
                 .padding(top = dimensionResource(R.dimen.bottom_sheet_depth_big_offset) * depth)
         } else {
             Modifier
+        }).semantics {
+            stateDescription = depthDescription
         }
     ) {
         Column(

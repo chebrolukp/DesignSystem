@@ -26,6 +26,9 @@
     <string name="back">Back</string>
     <string name="add">Add</string>
     <string name="expandable_title">Expandable Title</string>
+    <string name="expanded">Expanded</string>
+    <string name="collapsed">Collapsed</string>
+    <string name="stack_depth">Stack depth %1$d</string>
 
     <!-- Categories -->
     <string name="category_buttons">Buttons</string>

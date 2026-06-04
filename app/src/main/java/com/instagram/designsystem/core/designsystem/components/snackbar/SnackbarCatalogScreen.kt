@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.instagram.designsystem.R
+import com.instagram.designsystem.core.designsystem.components.animation.dsEnterFromRight
+import com.instagram.designsystem.core.designsystem.components.animation.dsExitToRight
 import kotlinx.coroutines.delay
 
 @Composable
@@ -120,14 +122,12 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
                 transitionSpec = {
                     if (targetState != null) {
                         // New snackbar entering: Slide in from right
-                        (slideInHorizontally { width -> width } + fadeIn()) togetherWith
-                                (slideOutHorizontally { width -> width } + fadeOut())
+                        dsEnterFromRight() togetherWith dsExitToRight()
                     } else {
                         // Snackbar being removed (timer or swipe): 
                         // If it was a swipe, DSSnackbar already moved it. 
                         // Fade out looks good for both cases.
-                        (slideInHorizontally { width -> width } + fadeIn()) togetherWith
-                                fadeOut()
+                        dsEnterFromRight() togetherWith fadeOut()
                     }
                 },
                 label = "snackbarAnimation"
