@@ -8,78 +8,58 @@ A modular Jetpack Compose design system featuring reusable components with advan
 - **Advanced Snackbars**:
   - Three variations: **Basic** (Centered), **WithIcon**, and **Complex** (Action Column).
   - **Auto-Queue Logic**: Displays snackbars sequentially with a standardized 4s duration.
-  - **Slide-in Animation**: Always slides in from the right edge as a solid unit using `AnimatedContent`.
+  - **Solid Slide-in**: Animates from the right edge as a solid unit using `AnimatedContent`.
   - **3-Way Swipe-to-Dismiss**: Supports swiping Left, Right, or Down with directional off-screen animations.
 - **Adaptive Bottom Sheets**:
+  - **Highly Flexible**: Now supports any custom content lambda and optional titles.
   - **Big Style**: Full-screen overlap with automatic Status Bar padding (WindowInsets) and a close icon.
   - **Small Style**: Fixed height (approx. half-screen) with a drag handle and close icon.
   - **Stacking Logic**: Recursive launching with depth-based offsets (**8dp** for Big, **5dp** for Small height reduction).
   - **Animated Dismissal**: Explicitly handles `hide()` transitions before clearing from state.
-- **Expandable Top Bar**:
-  - Collapses smoothly from `120dp` (34sp title) to `64dp` (18sp title) based on scroll progress.
-  - Uses `lerp` (Linear Interpolation) to synchronize height, font size, and background color transitions.
-- **Standard Top Bars**: Simple, Back, and Action variations with configurable `WindowInsets` for catalog vs. app usage.
-- **App Buttons**: Supporting Text and Round (Icon) styles with mandatory accessibility labels and "Back" arrow defaults.
+- **Smart Login Pattern ([DSLogin])**:
+  - **Multi-Entry**: Reusable UI pattern that can be launched as a full-screen **Screen** or within a **Modal** (Bottom Sheet).
+  - **Smart Validation**: Immediate feedback for illegal characters (`&#`) and delayed (focus-lost) validation for email formats (`@`) and password complexity.
+  - **Visual Stability**: Error message areas have reserved height to prevent UI "jumps" during validation.
+- **Standardized Text ([DSText])**: Maps design tokens to typography variations (`Headline`, `Body`, `Error`, `Label`) for unified styling.
+- **Global Banners ([DSBanner])**: Reusable alerts for **Error**, **Info**, and **Success** states, used for server-side feedback.
+- **Expandable Top Bar**: Collapses smoothly based on scroll progress using `lerp` interpolation for height, font size, and background colors.
+- **Form Controls**: [DSTextField] with built-in password masking, visibility toggles, and externalized error icons for better touch targets.
 
 ### 🎭 Centralized Animations (`DSAnimations.kt`)
-Standardized animation specs and transitions used across the system:
-- `dsExpand()` / `dsCollapse()`: Descriptive spring specs for sizing changes.
-- `dsEnterFromRight()` / `dsExitToRight()`: Unified horizontal slide + fade transitions.
+Standardized semantic animation specs and transitions:
+- `dsExpand()` / `dsCollapse()`: Unified spring specs for all expansion/contraction behaviors.
+- `dsEnterFromRight()` / `dsExitToRight()`: Global standard for horizontal component entry.
 
 ### ♿ Accessibility & Localization
-- **Zero Hardcoding**: All strings and dimensions are moved to `strings.xml` and `dimens.xml` for easy scaling and translation.
-- **Mandatory Content Descriptions**: Components with images strictly enforce `contentDescription` arguments.
-- **Semantic States**: Dynamic components use `stateDescription` (e.g., "Expanded", "Stack depth 2") to inform assistive technologies.
-- **Custom Semantic Actions**: Snackbars include accessibility actions for dismissal without requiring physical gestures.
+- **Zero Hardcoding**: 100% of strings and dimensions are externalized to `strings.xml` and `dimens.xml`.
+- **Mandatory Content Descriptions**: Strict enforcement of accessibility labels for all image-based components.
+- **Semantic States**: components announce "Expanded", "Collapsed", or "Stack depth X" to screen readers.
 
 ---
 
-## 🛠 Tech Stack
-- **Jetpack Compose**: Modern declarative UI framework.
-- **Material 3**: Foundation for the theme-aware component library.
-- **Navigation Compose**: Type-safe navigation for the catalog app.
-- **Kotlin Coroutines**: Powering queue delays and coordinated animations.
-- **Version Catalog**: Centralized dependency management via `libs.versions.toml`.
+## 🎨 Theme & Color System
+The system uses a hybrid approach to provide a modern look while protecting brand identity:
+- **Dynamic Color Support**: Core components like buttons follow the Android "Material You" palette.
+- **Brand Protection**: Uses a custom `LocalDesignSystemColors` provider to ensure critical elements (like snackbar actions) remain in vibrant **DeepSkyBlue** even when system-wide dynamic coloring is active.
+- **Contrast Awareness**: Automatically switches between light/dark semantic roles (e.g., `inverseSurface` for snackbars).
 
 ---
 
 ## 📂 Project Structure
-The project is organized into three distinct layers to ensure scalability and maintainability:
+Organized into three strict layers for maximum scalability:
 
-- **`foundation/`**: The atomic building blocks of the design system.
-  - `theme/`: Design tokens for Colors, Typography (`AppTypography`), and the global `DesignSystemTheme`.
-  - `animation/`: Centralized `DSAnimations` defining semantic motion specs.
-- **`components/`**: Purely reusable UI components that consume foundation tokens.
-  - `button/`: [DSButton] with primary/secondary and text/round styles.
-  - `snackbar/`: [DSSnackbar] with auto-queueing and multi-directional swipe logic.
-  - `bottomsheet/`: [DSBottomSheet] with recursive stacking and animated dismissal.
-  - `topBar/`: [DSTopBar] and [DSExpandableTopBar] scroll-reactive headers.
-  - `textfield/`: [DSTextField] with styles (Basic, Outlined) and variations (Default, Password).
-  - `text/`: [DSText] component mapping design tokens to typography variations.
-  - `banner/`: [DSBanner] for global status alerts.
-  - `login/`: [DSLogin] a high-level component pattern for user authentication.
-- **`catalog/`**: A "showroom" app layer used for development and documentation.
-  - `screens/`: Isolated preview screens for testing every component variation.
-  - `navigation/`: Internal navigation logic and routes for the catalog browser.
+- **`foundation/`**: Atomic building blocks (Theme, Colors, Type, Motion Tokens).
+- **`components/`**: Purely reusable UI library components.
+- **`catalog/`**: A developers-only "showroom" containing demo screens and navigation logic.
 
 ---
 
 ## 📖 Development Best Practices
-- **Documentation**: All core components include KDoc headers describing parameters and behavior.
-- **Theme Awareness**: Components use `MaterialTheme.colorScheme` instead of hardcoded colors, supporting Light and Dark modes natively.
-- **Encapsulation**: Catalog code is strictly separated from library code to prevent leaking demo logic into production.
+- **KDoc Documentation**: Every component is documented with headers describing parameters and expected behaviors.
+- **Stable UI**: Usage of `heightIn` and `Spacer` weight logic prevents layout shifting during state changes.
+- **Encapsulation**: Catalog code is strictly isolated to ensure the library can be extracted or published without bloat.
 
 ## 🏁 Getting Started
-1. Clone the repository.
-2. Open in **Android Studio Ladybug (or newer)**.
-3. Sync Gradle (Uses Version Catalogs).
-4. Run the `:app` module to browse the catalog.
-
-## 📝 Usage Example (Expandable Top Bar)
-```kotlin
-// Reusable component usage
-DSExpandableTopBar(
-    title = "My Page Title",
-    collapseFraction = scrollState.fraction // Derived from scroll offset
-)
-```
+1. Open in **Android Studio Ladybug**.
+2. Sync Gradle and run the `:app` module.
+3. Browse the categories to test animations, stacking, and validation logic.
