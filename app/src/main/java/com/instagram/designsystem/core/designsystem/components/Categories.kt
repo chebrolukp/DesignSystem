@@ -35,5 +35,9 @@ val categories = listOf(
     ComponentCategory(
         titleRes = R.string.category_snackbars,
         route = CatalogRoute.Snackbars.route
+    ),
+    ComponentCategory(
+        titleRes = R.string.category_text_fields,
+        route = CatalogRoute.TextFields.route
     )
 )

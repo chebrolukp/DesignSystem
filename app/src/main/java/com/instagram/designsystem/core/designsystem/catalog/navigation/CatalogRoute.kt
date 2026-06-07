@@ -7,4 +7,5 @@ sealed class CatalogRoute(val route: String) {
     data object ExpandableTopBar : CatalogRoute("expandable_topbar")
     data object BottomSheets : CatalogRoute("bottomsheets")
     data object Snackbars : CatalogRoute("snackbars")
+    data object TextFields : CatalogRoute("textfields")
 }

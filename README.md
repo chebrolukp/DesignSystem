@@ -54,6 +54,7 @@ The project is organized into three distinct layers to ensure scalability and ma
   - `snackbar/`: [DSSnackbar] with auto-queueing and multi-directional swipe logic.
   - `bottomsheet/`: [DSBottomSheet] with recursive stacking and animated dismissal.
   - `topBar/`: [DSTopBar] and [DSExpandableTopBar] scroll-reactive headers.
+  - `textfield/`: [DSTextField] with styles (Basic, Outlined) and variations (Default, Password).
 - **`catalog/`**: A "showroom" app layer used for development and documentation.
   - `screens/`: Isolated preview screens for testing every component variation.
   - `navigation/`: Internal navigation logic and routes for the catalog browser.

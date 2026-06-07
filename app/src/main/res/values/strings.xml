@@ -36,4 +36,13 @@
     <string name="category_expandable_topbar">Expandable TopBar</string>
     <string name="category_bottom_sheets">Bottom Sheets</string>
     <string name="category_snackbars">Snackbars</string>
+    <string name="category_text_fields">Text Fields</string>
+
+    <!-- Text Field Strings -->
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="label_username">Username</string>
+    <string name="label_password">Password</string>
+    <string name="label_email">Email</string>
+    <string name="placeholder_email">Enter your email</string>
 </resources>

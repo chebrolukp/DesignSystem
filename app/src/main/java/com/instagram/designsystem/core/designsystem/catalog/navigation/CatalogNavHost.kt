@@ -13,6 +13,7 @@ import com.instagram.designsystem.core.designsystem.catalog.screens.ButtonCatalo
 import com.instagram.designsystem.core.designsystem.catalog.screens.CatalogHomeScreen
 import com.instagram.designsystem.core.designsystem.catalog.screens.ExpandableTopBarCatalogScreen
 import com.instagram.designsystem.core.designsystem.catalog.screens.SnackbarCatalogScreen
+import com.instagram.designsystem.core.designsystem.catalog.screens.TextFieldCatalogScreen
 import com.instagram.designsystem.core.designsystem.catalog.screens.TopBarCatalogScreen
 
 @Composable
@@ -49,6 +50,10 @@ fun CatalogNavHost(padding: PaddingValues) {
 
         composable(CatalogRoute.Snackbars.route) {
             SnackbarCatalogScreen(modifier)
+        }
+
+        composable(CatalogRoute.TextFields.route) {
+            TextFieldCatalogScreen(modifier)
         }
     }
 }
