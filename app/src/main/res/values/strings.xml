@@ -45,4 +45,22 @@
     <string name="label_password">Password</string>
     <string name="label_email">Email</string>
     <string name="placeholder_email">Enter your email</string>
+
+    <!-- Login Screen Strings -->
+    <string name="login">Login</string>
+    <string name="login_screen_title">Design System Login</string>
+    <string name="error_email_missing_at">Missing @</string>
+    <string name="error_email_invalid_chars">Invalid characters in email</string>
+    <string name="error_password_length">At least 8 characters</string>
+    <string name="error_password_uppercase">Missing uppercase letter</string>
+    <string name="error_password_lowercase">Missing lowercase letter</string>
+    <string name="error_password_number">Missing number</string>
+    <string name="error_password_special">Missing special character</string>
+    <string name="error_invalid_email">Invalid email: must contain @ and no special characters other than @ and dots.</string>
+    <string name="error_password_criteria">Password must be 8+ chars, have 1 uppercase, 1 lowercase, 1 number, and 1 special character.</string>
+    <string name="server_error_message">Server Error: Unable to authenticate at this time. Please try again later.</string>
+    <string name="login_success">Login Successful!</string>
+    <string name="category_login_screen">Login Screen Pattern</string>
+    <string name="login_option_screen">Screen</string>
+    <string name="login_option_modal">Modal</string>
 </resources>

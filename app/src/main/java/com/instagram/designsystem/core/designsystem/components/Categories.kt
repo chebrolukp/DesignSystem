@@ -39,5 +39,9 @@ val categories = listOf(
     ComponentCategory(
         titleRes = R.string.category_text_fields,
         route = CatalogRoute.TextFields.route
+    ),
+    ComponentCategory(
+        titleRes = R.string.category_login_screen,
+        route = CatalogRoute.LoginPattern.route
     )
 )

@@ -2,6 +2,7 @@ package com.instagram.designsystem.core.designsystem.components.bottomsheet
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -49,7 +50,9 @@ data class SheetState(
  * @param size The [SheetSize] of the bottom sheet (Big or Small).
  * @param depth The current stacking depth, used to calculate offsets for multiple open sheets.
  * @param onDismiss Callback invoked when the sheet should be dismissed.
- * @param onLaunchNext Callback to trigger a new bottom sheet on top of the current one.
+ * @param title Optional title text. If null, a default title based on size and depth is shown.
+ * Pass an empty string to hide the title completely.
+ * @param content The composable content to be displayed within the bottom sheet.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,13 +60,20 @@ fun DSBottomSheet(
     size: SheetSize,
     depth: Int,
     onDismiss: () -> Unit,
-    onLaunchNext: (SheetSize) -> Unit
+    title: String? = null,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = size == SheetSize.Big
     )
     val scope = rememberCoroutineScope()
     val depthDescription = stringResource(R.string.stack_depth, depth)
+    
+    val displayTitle = title ?: if (size == SheetSize.Big) {
+        stringResource(R.string.big_bottom_sheet_title, depth)
+    } else {
+        stringResource(R.string.small_bottom_sheet_title, depth)
+    }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -99,15 +109,15 @@ fun DSBottomSheet(
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = if (size == SheetSize.Big) {
-                        stringResource(R.string.big_bottom_sheet_title, depth)
-                    } else {
-                        stringResource(R.string.small_bottom_sheet_title, depth)
-                    },
-                    style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.weight(1f)
-                )
+                if (displayTitle.isNotEmpty()) {
+                    Text(
+                        text = displayTitle,
+                        style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier.weight(1f)
+                    )
+                } else {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
                 IconButton(onClick = {
                     scope.launch { sheetState.hide() }.invokeOnCompletion {
                         if (!sheetState.isVisible) {
@@ -124,30 +134,7 @@ fun DSBottomSheet(
 
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
             
-            Text(
-                text = stringResource(R.string.bottom_sheet_text).repeat(50),
-                style = MaterialTheme.typography.bodyMedium
-            )
-
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_large)))
-
-            Button(
-                onClick = { onLaunchNext(SheetSize.Big) },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(stringResource(R.string.launch_big_sheet))
-            }
-
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
-
-            Button(
-                onClick = { onLaunchNext(SheetSize.Small) },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(stringResource(R.string.launch_small_sheet))
-            }
-            
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_extra_large)))
+            content()
         }
     }
 }

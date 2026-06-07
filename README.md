@@ -55,6 +55,9 @@ The project is organized into three distinct layers to ensure scalability and ma
   - `bottomsheet/`: [DSBottomSheet] with recursive stacking and animated dismissal.
   - `topBar/`: [DSTopBar] and [DSExpandableTopBar] scroll-reactive headers.
   - `textfield/`: [DSTextField] with styles (Basic, Outlined) and variations (Default, Password).
+  - `text/`: [DSText] component mapping design tokens to typography variations.
+  - `banner/`: [DSBanner] for global status alerts.
+  - `login/`: [DSLogin] a high-level component pattern for user authentication.
 - **`catalog/`**: A "showroom" app layer used for development and documentation.
   - `screens/`: Isolated preview screens for testing every component variation.
   - `navigation/`: Internal navigation logic and routes for the catalog browser.
