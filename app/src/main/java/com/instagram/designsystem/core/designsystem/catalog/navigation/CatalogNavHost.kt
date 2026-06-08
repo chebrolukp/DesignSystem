@@ -2,6 +2,7 @@ package com.instagram.designsystem.core.designsystem.catalog.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.instagram.designsystem.core.designsystem.catalog.navigation.CatalogRoute
 import com.instagram.designsystem.core.designsystem.catalog.screens.BottomSheetCatalogScreen
 import com.instagram.designsystem.core.designsystem.catalog.screens.ButtonCatalogScreen
 import com.instagram.designsystem.core.designsystem.catalog.screens.CatalogHomeScreen
@@ -26,7 +28,7 @@ import com.instagram.designsystem.core.designsystem.components.topBar.TopBarVari
 import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 
 @Composable
-fun CatalogNavHost() {
+fun CatalogNavHost(windowSizeClass: WindowSizeClass) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -37,6 +39,7 @@ fun CatalogNavHost() {
                 topBarVariant = TopBarVariant.Simple(title = stringResource(com.instagram.designsystem.R.string.app_name))
             ) { padding ->
                 CatalogHomeScreen(
+                    windowSizeClass = windowSizeClass,
                     modifier = Modifier.padding(padding).padding(DesignSystemSpacing.Medium),
                     onItemClick = {
                         navController.navigate(it)
