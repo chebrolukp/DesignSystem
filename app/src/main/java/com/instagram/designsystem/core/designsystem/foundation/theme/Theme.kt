@@ -12,14 +12,14 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = DeepSkyBlue,
-    tertiary = Pink80,
-    background = SurfaceDark,
-    surface = SurfaceDark,
-    inverseSurface = White,
-    inverseOnSurface = Black,
-    surfaceContainer = SurfaceDark
+    primary = Purple80, //prominent color of app. Used on buttons, key UI elements as background
+    secondary = DeepSkyBlue,//support accent, secondary buttons, less prominent interactive elements.
+    tertiary = Pink80,//optional 3rd accent. contrast highlights, special UI moments, badges.
+    background = SurfaceDark, // base color behind all screens
+    surface = SurfaceDark,//color of cards, sheets, dialogs, elevated content, container where text would be
+    inverseSurface = White,//snackbar or tooltips background - intentionally flips surface color for contrast
+    inverseOnSurface = Black,//text color on inverse surface
+    surfaceContainer = SurfaceDark //refined surface
 )
 
 private val LightColorScheme = lightColorScheme(
