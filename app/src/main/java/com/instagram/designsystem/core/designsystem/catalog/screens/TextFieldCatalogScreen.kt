@@ -7,12 +7,12 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.components.textfield.DSTextField
 import com.instagram.designsystem.core.designsystem.components.textfield.TextFieldStyle
 import com.instagram.designsystem.core.designsystem.components.textfield.TextFieldVariation
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 
 @Composable
 fun TextFieldCatalogScreen(modifier: Modifier = Modifier) {
@@ -24,7 +24,7 @@ fun TextFieldCatalogScreen(modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .padding(dimensionResource(R.dimen.padding_medium))
+            .padding(DesignSystemSpacing.Medium)
     ) {
         item {
             DSTextField(
@@ -39,7 +39,7 @@ fun TextFieldCatalogScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        item { Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium))) }
+        item { Spacer(modifier = Modifier.height(DesignSystemSpacing.Medium)) }
 
         item {
             DSTextField(
@@ -51,7 +51,7 @@ fun TextFieldCatalogScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        item { Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium))) }
+        item { Spacer(modifier = Modifier.height(DesignSystemSpacing.Medium)) }
 
         item {
             DSTextField(
@@ -67,7 +67,7 @@ fun TextFieldCatalogScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        item { Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium))) }
+        item { Spacer(modifier = Modifier.height(DesignSystemSpacing.Medium)) }
 
         item {
             DSTextField(
@@ -79,7 +79,7 @@ fun TextFieldCatalogScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        item { Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium))) }
+        item { Spacer(modifier = Modifier.height(DesignSystemSpacing.Medium)) }
 
         item {
             DSTextField(
@@ -91,7 +91,7 @@ fun TextFieldCatalogScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        item { Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium))) }
+        item { Spacer(modifier = Modifier.height(DesignSystemSpacing.Medium)) }
 
         item {
             DSTextField(

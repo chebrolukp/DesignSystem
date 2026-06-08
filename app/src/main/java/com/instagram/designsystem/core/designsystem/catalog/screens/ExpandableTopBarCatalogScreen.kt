@@ -16,18 +16,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.components.topBar.DSExpandableTopBar
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSizing
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 
 @Composable
 fun ExpandableTopBarCatalogScreen(modifier: Modifier = Modifier) {
     val scrollState = rememberLazyListState()
 
     // Max and min heights for calculating the collapse fraction
-    val maxHeight = dimensionResource(R.dimen.topbar_max_height)
-    val minHeight = dimensionResource(R.dimen.topbar_min_height)
+    val maxHeight = DesignSystemSizing.TopBarMaxHeight
+    val minHeight = DesignSystemSizing.TopBarMinHeight
     val maxHeightPx = with(LocalDensity.current) { maxHeight.toPx() }
     val minHeightPx = with(LocalDensity.current) { minHeight.toPx() }
 
@@ -58,7 +59,7 @@ fun ExpandableTopBarCatalogScreen(modifier: Modifier = Modifier) {
                     text = "Item $index",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(dimensionResource(R.dimen.padding_medium)),
+                        .padding(DesignSystemSpacing.Medium),
                     style = MaterialTheme.typography.bodyLarge
                 )
             }

@@ -9,8 +9,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.dimensionResource
-import com.instagram.designsystem.R
+import androidx.compose.ui.Modifier
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 import com.instagram.designsystem.core.designsystem.preview.MultiPreview
 
 /**
@@ -29,6 +29,7 @@ fun DSButton(
     enabled: Boolean = true,
     style: ButtonStyle = ButtonStyle.Text,
     variant: ButtonVariation = ButtonVariation.Primary,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
     val colors = when (variant) {
@@ -44,6 +45,7 @@ fun DSButton(
     }
     when (style) {
         ButtonStyle.Text -> Button(
+            modifier = modifier,
             enabled = enabled,
             colors = colors,
             onClick = onClick
@@ -52,6 +54,7 @@ fun DSButton(
         }
 
         is ButtonStyle.Round -> Button(
+            modifier = modifier,
             enabled = enabled,
             colors = colors,
             onClick = onClick
@@ -68,7 +71,7 @@ fun DSButton(
 @MultiPreview
 @Composable
 fun DSButtonPreview() {
-    Column(verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))) {
+    Column(verticalArrangement = Arrangement.spacedBy(DesignSystemSpacing.Small)) {
         Text("Primary")
         DSButton("Primary Enabled")
         DSButton("Primary Disabled", enabled = false)

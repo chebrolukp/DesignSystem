@@ -15,7 +15,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.BottomSheetDefaults
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,10 +31,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSizing
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.foundation.animation.SlideInRightAnimation
 import kotlinx.coroutines.launch
@@ -99,7 +99,7 @@ fun DSBottomSheet(
         modifier = (if (size == SheetSize.Big) {
             Modifier
                 .fillMaxHeight()
-                .padding(top = dimensionResource(R.dimen.bottom_sheet_depth_big_offset) * depth)
+                .padding(top = DesignSystemSizing.BottomSheetDepthBigOffset * depth)
         } else {
             Modifier
         }).semantics {
@@ -114,9 +114,9 @@ fun DSBottomSheet(
                         if (size == SheetSize.Big) Modifier.fillMaxHeight() else Modifier
                     )
                     .then(
-                        if (size == SheetSize.Small) Modifier.height(dimensionResource(R.dimen.bottom_sheet_small_height) - (dimensionResource(R.dimen.bottom_sheet_depth_small_offset) * depth)) else Modifier
+                        if (size == SheetSize.Small) Modifier.height(DesignSystemSizing.BottomSheetSmallHeight - (DesignSystemSizing.BottomSheetDepthSmallOffset * depth)) else Modifier
                     )
-                    .padding(dimensionResource(R.dimen.padding_medium))
+                    .padding(DesignSystemSpacing.Medium)
                     .verticalScroll(rememberScrollState())
             ) {
                 Row(
@@ -148,7 +148,7 @@ fun DSBottomSheet(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+                Spacer(modifier = Modifier.height(DesignSystemSpacing.Medium))
 
                 content()
             }

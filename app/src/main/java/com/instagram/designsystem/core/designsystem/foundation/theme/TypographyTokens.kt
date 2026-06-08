@@ -1,10 +1,10 @@
 package com.instagram.designsystem.core.designsystem.foundation.theme
 
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 /**
  * Centralized typography tokens (Source of Truth) for the design system.
- * Use these tokens instead of hardcoded .sp values.
  */
 object DesignSystemTypographyTokens {
     val FontSizeHeadlineExtraLarge = 34.sp
@@ -18,4 +18,6 @@ object DesignSystemTypographyTokens {
     val FontSizeLabelLarge = 14.sp
     val FontSizeLabelMedium = 12.sp
     val FontSizeLabelSmall = 11.sp
+
+    val Bold = FontWeight(800)
 }

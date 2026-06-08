@@ -1,6 +1,8 @@
 package com.instagram.designsystem.core.designsystem.foundation.theme
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -35,3 +37,13 @@ val AppTypography = Typography(
         fontSize = DesignSystemTypographyTokens.FontSizeBodySmall
     )
 )
+
+object DsTextStyles {
+    @Composable
+    fun HeadlineMedium() = MaterialTheme.typography.headlineMedium
+
+    @Composable
+    fun HeadlineMediumSmall() = MaterialTheme.typography.headlineMedium.copy(
+            fontSize = 20.sp
+        )
+}

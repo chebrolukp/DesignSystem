@@ -16,14 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.res.dimensionResource
+import com.instagram.designsystem.core.designsystem.foundation.theme.*
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
-import com.instagram.designsystem.R
-import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemTypographyTokens
-import com.instagram.designsystem.core.designsystem.foundation.theme.LocalDesignSystemColors
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -73,7 +69,7 @@ fun DSSnackbar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(dimensionResource(R.dimen.padding_medium))
+            .padding(DesignSystemSpacing.Medium)
             .semantics {
                 customActions = listOf(
                     CustomAccessibilityAction(
@@ -119,9 +115,9 @@ fun DSSnackbar(
             }
             .background(
                 MaterialTheme.colorScheme.inverseSurface,
-                RoundedCornerShape(dimensionResource(R.dimen.snackbar_corner_radius))
+                RoundedCornerShape(DesignSystemShape.SnackbarCornerRadius)
             )
-            .padding(dimensionResource(R.dimen.padding_medium))
+            .padding(DesignSystemSpacing.Medium)
     ) {
         when (val variation = data.variation) {
             is SnackbarVariation.Basic -> {
@@ -161,19 +157,19 @@ fun DSSnackbar(
                         contentDescription = variation.iconContentDescription,
                         tint = MaterialTheme.colorScheme.inverseOnSurface
                     )
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(DesignSystemSpacing.Medium))
                     Text(
                         text = variation.text,
                         color = MaterialTheme.colorScheme.inverseOnSurface,
                         modifier = Modifier.weight(1f)
                     )
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(DesignSystemSpacing.Medium))
                     Column(horizontalAlignment = Alignment.End) {
                         ActionTextBox(
                             text = variation.topActionText,
                             onClick = variation.onTopActionClick
                         )
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(DesignSystemSpacing.Small))
                         ActionTextBox(
                             text = variation.bottomActionText,
                             onClick = variation.onBottomActionClick
@@ -191,12 +187,15 @@ fun ActionTextBox(text: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .border(
-                1.dp,
+                DesignSystemShape.ThinBorder,
                 actionColor,
-                RoundedCornerShape(4.dp)
+                RoundedCornerShape(DesignSystemShape.ActionBoxCornerRadius)
             )
             .clickable { onClick() }
-            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .padding(
+                horizontal = DesignSystemSpacing.Small,
+                vertical = DesignSystemSpacing.ExtraSmall
+            )
     ) {
         Text(
             text = text,

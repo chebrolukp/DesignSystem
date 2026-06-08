@@ -14,9 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -26,6 +24,8 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.foundation.animation.dsExpand
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSizing
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemTypographyTokens
 
 /**
@@ -44,8 +44,8 @@ fun DSExpandableTopBar(
     title: String,
     collapseFraction: Float,
     modifier: Modifier = Modifier,
-    maxHeight: Dp = dimensionResource(R.dimen.topbar_max_height),
-    minHeight: Dp = dimensionResource(R.dimen.topbar_min_height),
+    maxHeight: Dp = DesignSystemSizing.TopBarMaxHeight,
+    minHeight: Dp = DesignSystemSizing.TopBarMinHeight,
     maxFontSize: TextUnit = DesignSystemTypographyTokens.FontSizeHeadlineExtraLarge,
     minFontSize: TextUnit = DesignSystemTypographyTokens.FontSizeHeadlineMedium
 ) {
@@ -78,7 +78,7 @@ fun DSExpandableTopBar(
             .fillMaxWidth()
             .height(animatedHeight)
             .background(animatedBackgroundColor)
-            .padding(horizontal = dimensionResource(R.dimen.padding_medium))
+            .padding(horizontal = DesignSystemSpacing.Medium)
             .semantics {
                 stateDescription = if (collapseFraction < 0.5f) expandedDescription else collapsedDescription
             },

@@ -17,14 +17,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.unit.dp
 import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.components.text.DSText
 import com.instagram.designsystem.core.designsystem.components.text.TextVariation
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 
 /**
  * A reusable text field component with customizable styles and variations.
@@ -147,7 +146,7 @@ fun DSTextField(
             }
 
             if (isError) {
-                Spacer(modifier = Modifier.width(dimensionResource(R.dimen.padding_small)))
+                Spacer(modifier = Modifier.width(DesignSystemSpacing.Small))
                 Icon(
                     imageVector = Icons.Default.Error,
                     contentDescription = null,
@@ -160,13 +159,13 @@ fun DSTextField(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 20.dp) // Reserves space even when empty
+                .heightIn(min = DesignSystemSpacing.ExtraLarge) // Reserves space even when empty
         ) {
             if (isError && !errorMessage.isNullOrEmpty()) {
                 DSText(
                     text = errorMessage,
                     variation = TextVariation.Error,
-                    modifier = Modifier.padding(start = dimensionResource(R.dimen.padding_medium))
+                    modifier = Modifier.padding(start = DesignSystemSpacing.Medium)
                 )
             }
         }

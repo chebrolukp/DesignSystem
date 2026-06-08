@@ -1,13 +1,10 @@
 package com.instagram.designsystem.core.designsystem.components.login
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.Modifier
 import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.components.banner.DSBanner
 import com.instagram.designsystem.core.designsystem.components.button.DSButton
@@ -15,6 +12,8 @@ import com.instagram.designsystem.core.designsystem.components.text.DSText
 import com.instagram.designsystem.core.designsystem.components.text.TextVariation
 import com.instagram.designsystem.core.designsystem.components.textfield.DSTextField
 import com.instagram.designsystem.core.designsystem.components.textfield.TextFieldVariation
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSizing
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 
 /**
  * A reusable login pattern component that can be used as a standalone screen or within a modal.
@@ -85,7 +84,7 @@ fun DSLogin(
 
     Column(
         modifier = modifier
-            .widthIn(max = 480.dp)
+            .widthIn(max = DesignSystemSizing.LoginMaxWidth)
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -93,14 +92,14 @@ fun DSLogin(
         if (serverError != null) {
             DSBanner(
                 message = serverError,
-                modifier = Modifier.padding(bottom = dimensionResource(R.dimen.padding_medium))
+                modifier = Modifier.padding(bottom = DesignSystemSpacing.Medium)
             )
         }
 
         DSText(
             text = stringResource(R.string.login_screen_title),
             variation = TextVariation.Headline,
-            modifier = Modifier.padding(bottom = dimensionResource(R.dimen.padding_large))
+            modifier = Modifier.padding(bottom = DesignSystemSpacing.Large)
         )
 
         DSTextField(
@@ -119,7 +118,7 @@ fun DSLogin(
             errorMessage = emailError
         )
 
-        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+        Spacer(modifier = Modifier.height(DesignSystemSpacing.Medium))
 
         DSTextField(
             value = password,
@@ -138,7 +137,7 @@ fun DSLogin(
             errorMessage = passwordError
         )
 
-        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_large)))
+        Spacer(modifier = Modifier.height(DesignSystemSpacing.Large))
 
         DSButton(
             text = stringResource(R.string.login),

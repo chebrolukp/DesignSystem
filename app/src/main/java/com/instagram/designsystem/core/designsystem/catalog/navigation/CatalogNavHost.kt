@@ -1,6 +1,5 @@
 package com.instagram.designsystem.core.designsystem.catalog.navigation
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -10,11 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.instagram.designsystem.core.designsystem.catalog.navigation.CatalogRoute
 import com.instagram.designsystem.core.designsystem.catalog.screens.BottomSheetCatalogScreen
 import com.instagram.designsystem.core.designsystem.catalog.screens.ButtonCatalogScreen
 import com.instagram.designsystem.core.designsystem.catalog.screens.CatalogHomeScreen
@@ -26,6 +23,7 @@ import com.instagram.designsystem.core.designsystem.catalog.screens.TopBarCatalo
 import com.instagram.designsystem.core.designsystem.components.login.DSLogin
 import com.instagram.designsystem.core.designsystem.components.screen.DSScreen
 import com.instagram.designsystem.core.designsystem.components.topBar.TopBarVariant
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 
 @Composable
 fun CatalogNavHost() {
@@ -39,7 +37,7 @@ fun CatalogNavHost() {
                 topBarVariant = TopBarVariant.Simple(title = stringResource(com.instagram.designsystem.R.string.app_name))
             ) { padding ->
                 CatalogHomeScreen(
-                    modifier = Modifier.padding(padding).padding(15.dp),
+                    modifier = Modifier.padding(padding).padding(DesignSystemSpacing.Medium),
                     onItemClick = {
                         navController.navigate(it)
                     }
@@ -54,7 +52,7 @@ fun CatalogNavHost() {
                     onBackClick = { navController.popBackStack() }
                 )
             ) { padding ->
-                ButtonCatalogScreen(Modifier.padding(padding).padding(15.dp))
+                ButtonCatalogScreen(Modifier.padding(padding).padding(DesignSystemSpacing.Medium))
             }
         }
 
@@ -65,7 +63,7 @@ fun CatalogNavHost() {
                     onBackClick = { navController.popBackStack() }
                 )
             ) { padding ->
-                TopBarCatalogScreen(Modifier.padding(padding).padding(15.dp))
+                TopBarCatalogScreen(Modifier.padding(padding).padding(DesignSystemSpacing.Medium))
             }
         }
 
@@ -81,7 +79,7 @@ fun CatalogNavHost() {
                     onBackClick = { navController.popBackStack() }
                 )
             ) { padding ->
-                BottomSheetCatalogScreen(Modifier.padding(padding).padding(15.dp))
+                BottomSheetCatalogScreen(Modifier.padding(padding).padding(DesignSystemSpacing.Medium))
             }
         }
 
@@ -92,7 +90,7 @@ fun CatalogNavHost() {
                     onBackClick = { navController.popBackStack() }
                 )
             ) { padding ->
-                SnackbarCatalogScreen(Modifier.padding(padding).padding(15.dp))
+                SnackbarCatalogScreen(Modifier.padding(padding).padding(DesignSystemSpacing.Medium))
             }
         }
 
@@ -103,7 +101,7 @@ fun CatalogNavHost() {
                     onBackClick = { navController.popBackStack() }
                 )
             ) { padding ->
-                TextFieldCatalogScreen(Modifier.padding(padding).padding(15.dp))
+                TextFieldCatalogScreen(Modifier.padding(padding).padding(DesignSystemSpacing.Medium))
             }
         }
 
@@ -115,7 +113,7 @@ fun CatalogNavHost() {
                 )
             ) { padding ->
                 LoginPatternCatalogScreen(
-                    modifier = Modifier.padding(padding).padding(15.dp),
+                    modifier = Modifier.padding(padding).padding(DesignSystemSpacing.Medium),
                     onScreenOptionClick = { navController.navigate(CatalogRoute.LoginScreen.route) }
                 )
             }
@@ -130,7 +128,7 @@ fun CatalogNavHost() {
                 )
             ) { padding ->
                 DSLogin(
-                    modifier = Modifier.padding(padding).padding(15.dp).fillMaxSize(),
+                    modifier = Modifier.padding(padding).padding(DesignSystemSpacing.Medium).fillMaxSize(),
                     serverError = serverError,
                     onFieldChange = { serverError = null },
                     onLoginClick = { email, _ ->

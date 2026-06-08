@@ -9,15 +9,15 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.Modifier
 import com.instagram.designsystem.R
-import com.instagram.designsystem.core.designsystem.foundation.animation.dsEnterFromRight
-import com.instagram.designsystem.core.designsystem.foundation.animation.dsExitToRight
 import com.instagram.designsystem.core.designsystem.components.snackbar.DSSnackbar
 import com.instagram.designsystem.core.designsystem.components.snackbar.SnackbarData
 import com.instagram.designsystem.core.designsystem.components.snackbar.SnackbarVariation
+import com.instagram.designsystem.core.designsystem.foundation.animation.dsEnterFromRight
+import com.instagram.designsystem.core.designsystem.foundation.animation.dsExitToRight
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 import kotlinx.coroutines.delay
 
 @Composable
@@ -72,7 +72,7 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
                 Text(stringResource(R.string.launch_basic_snackbar))
             }
 
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+            Spacer(modifier = Modifier.height(DesignSystemSpacing.Medium))
 
             Button(onClick = {
                 snackbarQueue.add(
@@ -89,7 +89,7 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
                 Text(stringResource(R.string.launch_icon_snackbar))
             }
 
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+            Spacer(modifier = Modifier.height(DesignSystemSpacing.Medium))
 
             Button(onClick = {
                 snackbarQueue.add(
@@ -115,7 +115,7 @@ fun SnackbarCatalogScreen(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = dimensionResource(R.dimen.padding_medium)),
+                .padding(bottom = DesignSystemSpacing.Medium),
             contentAlignment = Alignment.BottomCenter
         ) {
             AnimatedContent(

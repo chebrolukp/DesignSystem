@@ -9,6 +9,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextOverflow
 import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemTypographyTokens
 
 /**
@@ -36,10 +37,12 @@ fun DSText(
     variation: TextVariation,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
-    fontWeight: FontWeight? = null
+    maxLines: Int = 1,
+    fontWeight: FontWeight? = null,
+    ellipsize: Boolean = true
 ) {
     val style: TextStyle = when (variation) {
-        TextVariation.Headline -> MaterialTheme.typography.headlineMedium
+        TextVariation.Headline -> MaterialTheme.typography.headlineMedium.copy(fontWeight = DesignSystemTypographyTokens.Bold)
         TextVariation.Body -> MaterialTheme.typography.bodyMedium
         TextVariation.Error -> TextStyle(
             fontSize = DesignSystemTypographyTokens.FontSizeBodySmall,
@@ -64,6 +67,8 @@ fun DSText(
         },
         style = style,
         color = textColor,
-        fontWeight = fontWeight ?: style.fontWeight
+        fontWeight = fontWeight ?: style.fontWeight,
+        maxLines = maxLines,
+        overflow = if(ellipsize) TextOverflow.Ellipsis else TextOverflow.Clip
     )
 }

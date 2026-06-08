@@ -17,12 +17,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.components.bottomsheet.DSBottomSheet
 import com.instagram.designsystem.core.designsystem.components.bottomsheet.SheetSize
 import com.instagram.designsystem.core.designsystem.components.bottomsheet.SheetState
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 
 @Composable
 fun BottomSheetCatalogScreen(modifier: Modifier = Modifier) {
@@ -42,7 +42,7 @@ fun BottomSheetCatalogScreen(modifier: Modifier = Modifier) {
             Text(stringResource(R.string.launch_big_dialog))
         }
 
-        Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+        Spacer(modifier = Modifier.height(DesignSystemSpacing.Medium))
 
         Button(
             onClick = {
@@ -67,7 +67,7 @@ fun BottomSheetCatalogScreen(modifier: Modifier = Modifier) {
                 style = MaterialTheme.typography.bodyMedium
             )
 
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_large)))
+            Spacer(modifier = Modifier.height(DesignSystemSpacing.Large))
 
             Button(
                 onClick = {
@@ -84,7 +84,7 @@ fun BottomSheetCatalogScreen(modifier: Modifier = Modifier) {
                 Text(stringResource(R.string.launch_big_sheet))
             }
 
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
+            Spacer(modifier = Modifier.height(DesignSystemSpacing.Small))
 
             Button(
                 onClick = {
@@ -101,7 +101,7 @@ fun BottomSheetCatalogScreen(modifier: Modifier = Modifier) {
                 Text(stringResource(R.string.launch_small_sheet))
             }
 
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_extra_large)))
+            Spacer(modifier = Modifier.height(DesignSystemSpacing.ExtraLarge))
         }
     }
 }

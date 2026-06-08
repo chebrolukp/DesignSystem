@@ -7,10 +7,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
-import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.components.topBar.DSTopBar
 import com.instagram.designsystem.core.designsystem.components.topBar.TopBarVariant
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 
 /**
  * The TopAppBar in Material 3 includes default window insets (specifically for the status bar) which adds extra padding at the top.
@@ -20,7 +19,7 @@ import com.instagram.designsystem.core.designsystem.components.topBar.TopBarVari
 fun TopBarCatalogScreen(modifier: Modifier) {
     LazyColumn(modifier = modifier) {
         item {
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
+            Spacer(modifier = Modifier.height(DesignSystemSpacing.Small))
         }
         item {
             Surface {
@@ -33,7 +32,7 @@ fun TopBarCatalogScreen(modifier: Modifier) {
             }
         }
         item {
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
+            Spacer(modifier = Modifier.height(DesignSystemSpacing.Small))
         }
         item {
             DSTopBar(
@@ -45,7 +44,7 @@ fun TopBarCatalogScreen(modifier: Modifier) {
             )
         }
         item {
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
+            Spacer(modifier = Modifier.height(DesignSystemSpacing.Small))
         }
         item {
             DSTopBar(

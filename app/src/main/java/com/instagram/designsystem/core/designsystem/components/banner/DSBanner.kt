@@ -4,14 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
-import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.components.text.DSText
 import com.instagram.designsystem.core.designsystem.components.text.TextVariation
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 
 /**
  * Defines the different visual styles for the [DSBanner] component.
@@ -54,7 +52,7 @@ fun DSBanner(
         modifier = modifier
             .fillMaxWidth()
             .background(backgroundColor)
-            .padding(dimensionResource(R.dimen.padding_small)),
+            .padding(DesignSystemSpacing.Small),
         fontWeight = FontWeight.Bold
     )
 }
