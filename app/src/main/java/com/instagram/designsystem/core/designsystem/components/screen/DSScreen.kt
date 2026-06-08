@@ -26,8 +26,8 @@ import com.instagram.designsystem.core.designsystem.foundation.animation.SlideIn
  */
 @Composable
 fun DSScreen(
-    topBarVariant: TopBarVariant? = null,
     modifier: Modifier = Modifier,
+    topBarVariant: TopBarVariant? = null,
     content: @Composable (PaddingValues) -> Unit
 ) {
     var isVisible by remember { mutableStateOf(false) }

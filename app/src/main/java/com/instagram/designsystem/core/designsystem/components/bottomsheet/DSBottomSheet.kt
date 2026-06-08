@@ -24,7 +24,12 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -32,6 +37,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import com.instagram.designsystem.R
+import com.instagram.designsystem.core.designsystem.foundation.animation.SlideInRightAnimation
 import kotlinx.coroutines.launch
 
 enum class SheetSize {
@@ -67,7 +73,15 @@ fun DSBottomSheet(
         skipPartiallyExpanded = size == SheetSize.Big
     )
     val scope = rememberCoroutineScope()
+    var isContentVisible by remember { mutableStateOf(false) }
     val depthDescription = stringResource(R.string.stack_depth, depth)
+
+    // Trigger entry animation when sheet is expanded
+    LaunchedEffect(sheetState.isVisible) {
+        if (sheetState.isVisible) {
+            isContentVisible = true
+        }
+    }
     
     val displayTitle = title ?: if (size == SheetSize.Big) {
         stringResource(R.string.big_bottom_sheet_title, depth)
@@ -92,49 +106,52 @@ fun DSBottomSheet(
             stateDescription = depthDescription
         }
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .then(
-                    if (size == SheetSize.Big) Modifier.fillMaxHeight() else Modifier
-                )
-                .then(
-                    if (size == SheetSize.Small) Modifier.height(dimensionResource(R.dimen.bottom_sheet_small_height) - (dimensionResource(R.dimen.bottom_sheet_depth_small_offset) * depth)) else Modifier
-                )
-                .padding(dimensionResource(R.dimen.padding_medium))
-                .verticalScroll(rememberScrollState())
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
+        SlideInRightAnimation(visible = isContentVisible) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .then(
+                        if (size == SheetSize.Big) Modifier.fillMaxHeight() else Modifier
+                    )
+                    .then(
+                        if (size == SheetSize.Small) Modifier.height(dimensionResource(R.dimen.bottom_sheet_small_height) - (dimensionResource(R.dimen.bottom_sheet_depth_small_offset) * depth)) else Modifier
+                    )
+                    .padding(dimensionResource(R.dimen.padding_medium))
+                    .verticalScroll(rememberScrollState())
             ) {
-                if (displayTitle.isNotEmpty()) {
-                    Text(
-                        text = displayTitle,
-                        style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier.weight(1f)
-                    )
-                } else {
-                    Spacer(modifier = Modifier.weight(1f))
-                }
-                IconButton(onClick = {
-                    scope.launch { sheetState.hide() }.invokeOnCompletion {
-                        if (!sheetState.isVisible) {
-                            onDismiss()
-                        }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    if (displayTitle.isNotEmpty()) {
+                        Text(
+                            text = displayTitle,
+                            style = MaterialTheme.typography.titleLarge,
+                            modifier = Modifier.weight(1f)
+                        )
+                    } else {
+                        Spacer(modifier = Modifier.weight(1f))
                     }
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = stringResource(R.string.close)
-                    )
+                    IconButton(onClick = {
+                        isContentVisible = false
+                        scope.launch { sheetState.hide() }.invokeOnCompletion {
+                            if (!sheetState.isVisible) {
+                                onDismiss()
+                            }
+                        }
+                    }) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = stringResource(R.string.close)
+                        )
+                    }
                 }
-            }
 
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
-            
-            content()
+                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+
+                content()
+            }
         }
     }
 }

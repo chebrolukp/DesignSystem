@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.components.banner.DSBanner
 import com.instagram.designsystem.core.designsystem.components.button.DSButton
@@ -83,7 +84,9 @@ fun DSLogin(
     }
 
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .widthIn(max = 480.dp)
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Global Server Error at the top

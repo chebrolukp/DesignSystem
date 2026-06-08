@@ -12,6 +12,7 @@ A modular Jetpack Compose design system featuring reusable components with advan
   - **3-Way Swipe-to-Dismiss**: Supports swiping Left, Right, or Down with directional off-screen animations.
 - **Adaptive Bottom Sheets**:
   - **Highly Flexible**: Now supports any custom content lambda and optional titles.
+  - **Standard Transitions**: Includes built-in entry/exit animations for all modal content.
   - **Big Style**: Full-screen overlap with automatic Status Bar padding (WindowInsets) and a close icon.
   - **Small Style**: Fixed height (approx. half-screen) with a drag handle and close icon.
   - **Stacking Logic**: Recursive launching with depth-based offsets (**8dp** for Big, **5dp** for Small height reduction).
@@ -23,6 +24,8 @@ A modular Jetpack Compose design system featuring reusable components with advan
 - **Standardized Text ([DSText])**: Maps design tokens to typography variations (`Headline`, `Body`, `Error`, `Label`) for unified styling.
 - **Global Banners ([DSBanner])**: Reusable alerts for **Error**, **Info**, and **Success** states, used for server-side feedback.
 - **Expandable Top Bar**: Collapses smoothly based on scroll progress using `lerp` interpolation for height, font size, and background colors.
+- **Standardized Screens ([DSScreen])**:
+  - A unified page container that manages `Scaffold` structure, `TopBar` integration, and automatic entry animations for a consistent "app-like" transition between catalog items.
 - **Form Controls**: [DSTextField] with built-in password masking, visibility toggles, and externalized error icons for better touch targets.
 
 ### 🎭 Centralized Animations (`DSAnimations.kt`)
@@ -50,6 +53,15 @@ Organized into three strict layers for maximum scalability:
 
 - **`foundation/`**: Atomic building blocks (Theme, Colors, Type, Motion Tokens).
 - **`components/`**: Purely reusable UI library components.
+  - `button/`: [DSButton] with primary/secondary and text/round styles.
+  - `snackbar/`: [DSSnackbar] with auto-queueing and multi-directional swipe logic.
+  - `bottomsheet/`: [DSBottomSheet] with recursive stacking, animated dismissal, and standard content transitions.
+  - `topBar/`: [DSTopBar] and [DSExpandableTopBar] scroll-reactive headers.
+  - `screen/`: [DSScreen] a standard page layout with built-in Scaffold and entry animations.
+  - `textfield/`: [DSTextField] with styles (Basic, Outlined) and variations (Default, Password).
+  - `text/`: [DSText] component mapping design tokens to typography variations.
+  - `banner/`: [DSBanner] for global status alerts.
+  - `login/`: [DSLogin] high-level authentication pattern.
 - **`catalog/`**: A developers-only "showroom" containing demo screens and navigation logic.
 
 ---

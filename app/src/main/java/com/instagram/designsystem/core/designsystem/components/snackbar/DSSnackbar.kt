@@ -17,12 +17,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
 import com.instagram.designsystem.R
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemTypographyTokens
 import com.instagram.designsystem.core.designsystem.foundation.theme.LocalDesignSystemColors
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -129,7 +129,7 @@ fun DSSnackbar(
                     Text(
                         text = variation.text,
                         color = LocalDesignSystemColors.current.basicSnackbarText,
-                        fontSize = 16.sp // Sp cannot easily be dimenResource for text size without complexity
+                        fontSize = DesignSystemTypographyTokens.FontSizeBodyLarge
                     )
                 }
             }
@@ -201,7 +201,7 @@ fun ActionTextBox(text: String, onClick: () -> Unit) {
         Text(
             text = text,
             color = actionColor,
-            fontSize = 12.sp
+            fontSize = DesignSystemTypographyTokens.FontSizeBodySmall
         )
     }
 }

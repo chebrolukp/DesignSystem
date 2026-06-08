@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import com.instagram.designsystem.R
 import com.instagram.designsystem.core.designsystem.foundation.animation.dsExpand
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemTypographyTokens
 
 /**
  * A top bar that expands and collapses based on a provided [collapseFraction].
@@ -45,8 +46,8 @@ fun DSExpandableTopBar(
     modifier: Modifier = Modifier,
     maxHeight: Dp = dimensionResource(R.dimen.topbar_max_height),
     minHeight: Dp = dimensionResource(R.dimen.topbar_min_height),
-    maxFontSize: TextUnit = 34.sp,
-    minFontSize: TextUnit = 18.sp
+    maxFontSize: TextUnit = DesignSystemTypographyTokens.FontSizeHeadlineExtraLarge,
+    minFontSize: TextUnit = DesignSystemTypographyTokens.FontSizeHeadlineMedium
 ) {
     val expandedDescription = stringResource(R.string.expanded)
     val collapsedDescription = stringResource(R.string.collapsed)

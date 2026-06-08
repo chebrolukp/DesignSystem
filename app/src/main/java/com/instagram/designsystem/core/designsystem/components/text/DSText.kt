@@ -7,6 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
+import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemTypographyTokens
 
 /**
  * Defines the different typography variations for the [DSText] component.
@@ -38,7 +41,10 @@ fun DSText(
     val style: TextStyle = when (variation) {
         TextVariation.Headline -> MaterialTheme.typography.headlineMedium
         TextVariation.Body -> MaterialTheme.typography.bodyMedium
-        TextVariation.Error -> MaterialTheme.typography.bodySmall
+        TextVariation.Error -> TextStyle(
+            fontSize = DesignSystemTypographyTokens.FontSizeBodySmall,
+            fontWeight = FontWeight.Normal
+        )
         TextVariation.Label -> MaterialTheme.typography.labelMedium
     }
 
@@ -51,7 +57,11 @@ fun DSText(
 
     Text(
         text = text,
-        modifier = modifier,
+        modifier = modifier.semantics {
+            if (variation == TextVariation.Headline) {
+                heading()
+            }
+        },
         style = style,
         color = textColor,
         fontWeight = fontWeight ?: style.fontWeight
