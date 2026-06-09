@@ -26,10 +26,10 @@ import com.instagram.designsystem.core.designsystem.preview.MultiPreview
 @Composable
 fun DSButton(
     text: String,
+    modifier: Modifier = Modifier,
     enabled: Boolean = true,
     style: ButtonStyle = ButtonStyle.Text,
     variant: ButtonVariation = ButtonVariation.Primary,
-    modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
     val colors = when (variant) {
