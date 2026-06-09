@@ -10,6 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemTypographyTokens
 
 /**
@@ -17,6 +18,7 @@ import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSyste
  */
 enum class TextVariation {
     Headline,
+    Title,
     Body,
     Error,
     Label
@@ -37,12 +39,14 @@ fun DSText(
     variation: TextVariation,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
+    fontSize: TextUnit = TextUnit.Unspecified,
     maxLines: Int = 1,
     fontWeight: FontWeight? = null,
     ellipsize: Boolean = true
 ) {
     val style: TextStyle = when (variation) {
         TextVariation.Headline -> MaterialTheme.typography.headlineMedium.copy(fontWeight = DesignSystemTypographyTokens.Bold)
+        TextVariation.Title -> MaterialTheme.typography.titleLarge
         TextVariation.Body -> MaterialTheme.typography.bodyMedium
         TextVariation.Error -> TextStyle(
             fontSize = DesignSystemTypographyTokens.FontSizeBodySmall,
@@ -67,8 +71,9 @@ fun DSText(
         },
         style = style,
         color = textColor,
+        fontSize = fontSize,
         fontWeight = fontWeight ?: style.fontWeight,
         maxLines = maxLines,
-        overflow = if(ellipsize) TextOverflow.Ellipsis else TextOverflow.Clip
+        overflow = if (ellipsize) TextOverflow.Ellipsis else TextOverflow.Clip
     )
 }

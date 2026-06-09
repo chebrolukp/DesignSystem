@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -23,6 +22,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import com.instagram.designsystem.R
+import com.instagram.designsystem.core.designsystem.components.text.DSText
+import com.instagram.designsystem.core.designsystem.components.text.TextVariation
 import com.instagram.designsystem.core.designsystem.foundation.animation.dsExpand
 import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSizing
 import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
@@ -84,11 +85,10 @@ fun DSExpandableTopBar(
             },
         contentAlignment = Alignment.CenterStart
     ) {
-        Text(
+        DSText(
             text = title,
-            fontSize = animatedTextSizeValue.sp,
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.onSurface
+            variation = TextVariation.Headline,
+            fontSize = animatedTextSizeValue.sp
         )
     }
 }

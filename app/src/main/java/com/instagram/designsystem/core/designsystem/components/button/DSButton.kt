@@ -6,10 +6,12 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.instagram.designsystem.core.designsystem.foundation.theme.DesignSystemSpacing
 import com.instagram.designsystem.core.designsystem.preview.MultiPreview
 
@@ -17,10 +19,11 @@ import com.instagram.designsystem.core.designsystem.preview.MultiPreview
  * A reusable button component that supports different styles and variations.
  *
  * @param text The text to be displayed on the button (or used for accessibility in [ButtonStyle.Round]).
+ * @param modifier The [Modifier] to be applied to this button.
  * @param enabled Controls the enabled state of the button. When `false`, this component will not
  * respond to user input, and it will appear visually disabled.
- * @param style The visual style of the button. Can be [ButtonStyle.Text] or [ButtonStyle.Round].
- * @param variant The color variation of the button. Can be [ButtonVariation.Primary] or [ButtonVariation.Secondary].
+ * @param style The visual style of the button. Can be [ButtonStyle.Text], [ButtonStyle.Round], or [ButtonStyle.IconOnly].
+ * @param variant The color variation of the button. Can be [ButtonVariation.Primary], [ButtonVariation.Secondary], or [ButtonVariation.Ghost].
  * @param onClick Called when this button is clicked.
  */
 @Composable
@@ -42,7 +45,13 @@ fun DSButton(
             containerColor = MaterialTheme.colorScheme.secondary,
             contentColor = MaterialTheme.colorScheme.onSecondary
         )
+
+        ButtonVariation.Ghost -> ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent,
+            contentColor = MaterialTheme.colorScheme.primary
+        )
     }
+
     when (style) {
         ButtonStyle.Text -> Button(
             modifier = modifier,
@@ -61,8 +70,20 @@ fun DSButton(
         ) {
             Icon(
                 imageVector = style.imageVector,
-                tint = if (enabled) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
+                tint = if (enabled) colors.contentColor else MaterialTheme.colorScheme.onSurfaceVariant,
                 contentDescription = style.contentDescription
+            )
+        }
+
+        is ButtonStyle.IconOnly -> IconButton(
+            onClick = onClick,
+            modifier = modifier,
+            enabled = enabled
+        ) {
+            Icon(
+                imageVector = style.imageVector,
+                contentDescription = style.contentDescription,
+                tint = if (enabled) colors.contentColor else MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }
