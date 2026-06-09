@@ -108,5 +108,49 @@ fun DSTopBar(
                 )
             )
         }
+
+        is TopBarVariant.NavigationAction -> {
+            TopAppBar(
+                modifier = modifier,
+                windowInsets = windowInsets,
+                title = {
+                    DSText(
+                        text = variant.title,
+                        variation = TextVariation.Title,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                },
+                navigationIcon = {
+                    DSButton(
+                        text = stringResource(R.string.back),
+                        onClick = variant.onBackClick,
+                        style = ButtonStyle.IconOnly(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.back)
+                        ),
+                        variant = ButtonVariation.Ghost,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                },
+                actions = {
+                    DSButton(
+                        text = stringResource(R.string.add),
+                        onClick = variant.onActionClick,
+                        style = ButtonStyle.IconOnly(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = stringResource(R.string.add)
+                        ),
+                        variant = ButtonVariation.Ghost,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            )
+        }
     }
 }

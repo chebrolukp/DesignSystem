@@ -24,6 +24,7 @@ import com.instagram.designsystem.core.designsystem.preview.MultiPreview
  * respond to user input, and it will appear visually disabled.
  * @param style The visual style of the button. Can be [ButtonStyle.Text], [ButtonStyle.Round], or [ButtonStyle.IconOnly].
  * @param variant The color variation of the button. Can be [ButtonVariation.Primary], [ButtonVariation.Secondary], or [ButtonVariation.Ghost].
+ * @param contentColor Optional color to be used for the button's content (text or icon).
  * @param onClick Called when this button is clicked.
  */
 @Composable
@@ -33,22 +34,23 @@ fun DSButton(
     enabled: Boolean = true,
     style: ButtonStyle = ButtonStyle.Text,
     variant: ButtonVariation = ButtonVariation.Primary,
+    contentColor: Color = Color.Unspecified,
     onClick: () -> Unit = {}
 ) {
     val colors = when (variant) {
         ButtonVariation.Primary -> ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary
+            contentColor = if (contentColor != Color.Unspecified) contentColor else MaterialTheme.colorScheme.onPrimary
         )
 
         ButtonVariation.Secondary -> ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.secondary,
-            contentColor = MaterialTheme.colorScheme.onSecondary
+            contentColor = if (contentColor != Color.Unspecified) contentColor else MaterialTheme.colorScheme.onSecondary
         )
 
         ButtonVariation.Ghost -> ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
-            contentColor = MaterialTheme.colorScheme.primary
+            contentColor = if (contentColor != Color.Unspecified) contentColor else MaterialTheme.colorScheme.primary
         )
     }
 

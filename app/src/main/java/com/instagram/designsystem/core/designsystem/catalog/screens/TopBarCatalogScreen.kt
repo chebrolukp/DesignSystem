@@ -55,5 +55,18 @@ fun TopBarCatalogScreen(modifier: Modifier) {
                 windowInsets = WindowInsets(0, 0, 0, 0)
             )
         }
+        item {
+            Spacer(modifier = Modifier.height(DesignSystemSpacing.Small))
+        }
+        item {
+            DSTopBar(
+                variant = TopBarVariant.NavigationAction(
+                    title = "Dual Action",
+                    onBackClick = {},
+                    onActionClick = {}
+                ),
+                windowInsets = WindowInsets(0, 0, 0, 0)
+            )
+        }
     }
 }
